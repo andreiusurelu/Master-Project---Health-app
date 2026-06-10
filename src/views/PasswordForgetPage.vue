@@ -28,10 +28,7 @@ const messageSent = ref(false)
 
 const submit = async () => {
     const { error } = await supabase.auth.resetPasswordForEmail(
-        emailAddress.value,
-        {
-            redirectTo: 'http://localhost:5173/resetPassword'
-        }
+        emailAddress.value
     )
     if (error) {
         message.value = 'An unexpected error appeared. Contact your administrator.'

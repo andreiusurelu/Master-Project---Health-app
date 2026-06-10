@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive } from 'vue'
+import { ref, computed, reactive, onMounted } from 'vue'
 import { BButton, BForm, BFormInput, BFormGroup, BFormInvalidFeedback, BLink, BRow, BCol } from 'bootstrap-vue-next'
 import router from '../router'
 import { supabase } from '../components/client_data.js'
@@ -56,6 +56,14 @@ const submit = async () => {
     }
     router.push('/userForm')
 }
+
+onMounted(() => {
+    supabase.auth.onAuthStateChange((event) => {
+    if (event === 'SIGNED_IN') {
+      router.push('/userForm')
+    }
+  })
+})
 
 </script>
 
