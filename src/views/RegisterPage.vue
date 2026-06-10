@@ -17,6 +17,7 @@
                     type="password" required :state="validateRepeatPassword"/>
                 <BFormInvalidFeedback :state="validateRepeatPassword">Password doesn't match</BFormInvalidFeedback>
             </BFormGroup>
+            <p class="error" v-if="errDetected">{{ errMessage }}</p>
             <BButton variant="primary" type="submit">Submit</BButton>
         </BForm>
     </div>
@@ -36,6 +37,34 @@ const userData = reactive({
     passwordRepeat: ''
 })
 
+const errDetected = ref(false)
+const errMessage = ref('')
+
+const errorMessage = (error) => {
+    if (error instanceof AuthApiError) {
+        switch (error.status) {
+            case 400:
+                return error.message
+            case 422:
+                return error.message
+            case 429:
+                return "Issue in sending an email. Please try again."
+            case 500:
+                return "Server error, contact an administrator."
+            default:
+                return "Unknown error, contact an administrator."
+        }
+    }
+    else {
+        if (error instanceof AuthSessionMissingError) {
+            return "Unable to create session, contact an administrator."
+        }
+        else {
+            return "Unknown error, contact an administrator."
+        }
+    }
+}
+
 const validateEmail = computed(() => 
     constants.emailRegex.test(userData.emailAddress))
 
@@ -49,6 +78,8 @@ const submit = async () => {
         password: userData.password,
     })
     if (error) {
+        errDetected.value = true
+        errMessage.value = errorMessage(error)
         console.log(error)
         return
     }
@@ -70,5 +101,9 @@ form {
 
 button {
     margin-top: 20px;
+}
+
+.error {
+    color: red;
 }
 </style>

@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import {ref} from 'vue'
 
 const sessionStorageAdapter = {
   getItem: (key) => sessionStorage.getItem(key),
@@ -16,3 +17,12 @@ export const supabase = createClient(
         }
     }
 )
+
+export const authEvent = ref(null)
+export const authSession = ref(null)
+
+supabase.auth.onAuthStateChange((event, session) => {
+    console.log('onAuthStateChange was fired up for event: ', event)
+  authEvent.value = event
+  authSession.value = session
+})

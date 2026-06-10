@@ -51,8 +51,7 @@ const routes = [
   },
   {
     path: '/resetPassword',
-    component: PasswordResetPage,
-    meta: {requiresAuth: true}
+    component: PasswordResetPage
   },
   {
     path: '/about',
@@ -66,11 +65,20 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to) => {
-  const {data : {user}} = await supabase.auth.getUser()
+  supabase.auth.onAuthStateChange((event) => {
+    if (event === 'USER_UPDATED' || event == 'PASSWORD_RECOVERY') {
+      console.log('OVER HERE!!!! Event fired up: ', event)
+    }})
+  const {
+    data: { session }
+  } = await supabase.auth.getSession()
+
+  const user = session?.user
 
   if (to.meta.requiresAuth && !user) {
     return '/login'
   }
+  return true
 })
 
 export default router

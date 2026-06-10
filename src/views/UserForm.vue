@@ -20,6 +20,9 @@
           </BFormRadio>
         </BFormRadioGroup>
       </BFormGroup>
+      <BFormGroup id="level-group" label="Level:" label-for="level-input" description="Your fitness level">
+        <BFormSelect id="level-input" :options="levels" v-model="form.level" required/>
+      </BFormGroup>
       <BFormGroup id="weight-group" label="Weight:" label-for="weight-input" description="Your current weight (in kilograms)">
         <BFormInput id="weight-input" v-model="form.weight" type="number" placeholder="e.g 80 kgs" required
         :state="validateWeight"/>
@@ -46,13 +49,29 @@
 import { reactive, computed, nextTick, ref, onBeforeMount } from 'vue'
 import router from '../router'
 import { supabase } from '../components/client_data'
-import { BButton, BForm, BFormInput, BFormGroup, BFormInvalidFeedback, BFormRadio, BFormRadioGroup } from 'bootstrap-vue-next'
+import { BButton, BForm, BFormInput, BFormGroup, BFormInvalidFeedback, BFormRadio, BFormRadioGroup, BFormSelect } from 'bootstrap-vue-next'
+
+const levels = [
+  {
+    value: null, text: 'Please select an option'
+  },
+  {
+    value: 1, text: 'Beginner'
+  },
+  {
+    value: 2, text: 'Intermediary'
+  },
+  {
+    value: 3, text: 'Advanced'
+  }
+]
 
 const form = reactive({
   age: '',
   sex: null,
   height: '',
-  weight: ''
+  weight: '',
+  level: ''
 })
 
 const show = ref(true)
@@ -68,7 +87,7 @@ onBeforeMount(async () => {
       throw error
     }
 
-    if (data !== null && status == 200) {
+    if (data !== null && data.length > 0 && status == 200) {
       router.push('/cards')
     }
   }
@@ -84,7 +103,8 @@ const submitForm = async () => {
     age: form.age,
     sex: form.sex == 'male' ? 0 : 1,
     height: form.height,
-    weight: form.weight
+    weight: form.weight,
+    level: form.level
   }, {
     onConflict: 'userId'
   })
