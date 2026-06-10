@@ -55,7 +55,11 @@ let notDetecting = true
 const startCamera = async () => {
   try {
     stream = await navigator.mediaDevices.getUserMedia({
-      video: true
+      video: {
+        facingMode: 'user',
+        width: { ideal: 640 },
+        height: { ideal: 480 }
+      }
     });
 
     videoRef.value.srcObject = stream;
@@ -87,6 +91,10 @@ const stopCamera = () => {
 
   if (videoRef.value) {
     videoRef.value.srcObject = null
+  }
+  if (detectionInterval) {
+    clearInterval(detectionInterval)
+    detectionInterval = null
   }
 }
 

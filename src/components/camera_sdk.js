@@ -29,6 +29,8 @@ class CameraSDK extends EventTarget {
         else {
             console.error("Couldn't find canvasOverlay");
         }
+        this.canvasElement.width = 640;
+        this.canvasElement.height = 480;
     }
 
     async initModel() {
@@ -39,6 +41,12 @@ class CameraSDK extends EventTarget {
         );
         console.log('vision object:', vision)
         console.log('vision keys:', Object.keys(vision))
+        if (navigator.gpu) {
+
+        }
+        else {
+            
+        }
         this.poseLandmarker = await PoseLandmarker.createFromOptions(
             vision,
             {
@@ -114,10 +122,6 @@ class CameraSDK extends EventTarget {
 
     displayVideoResult(result) {
         if (this.canvasElement) {
-            const width = this.video.videoWidth;
-            const height = this.video.videoHeight;
-            this.canvasElement.width = width;
-            this.canvasElement.height = height;
 
             this.canvasCtx.save();
             this.canvasCtx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
