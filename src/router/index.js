@@ -29,7 +29,7 @@ const routes = [
   {
     path: '/camera',
     component: CameraPage,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true, fullscreen: true }
   },
   {
     path: '/feedback',

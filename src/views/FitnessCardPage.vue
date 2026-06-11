@@ -7,7 +7,7 @@
             <p>You will have to click the record button and then position yourself in front of the camera <b>until the border color turns green</b>.</p>
             <p>You will proceed to train according to the selected exercise and do up to {{ selectedExercise?.noReps }} repetitions.</p>
             <p>When you're done, click on the record button to stop the recording session and proceed to the feedback form.</p>
-            <b>By clicking Ok, you confirm that you've read the instructions.</b>
+            <p><b>By clicking Ok, you confirm that you've read the instructions.</b></p>
         </BModal>
         <BCard
             v-for="item in items"
@@ -65,8 +65,10 @@ const cancel = () => {
 }
 
 const confirm = () => {
-    localStorage.setItem('selectedExercise', JSON.stringify(selectedExercise.value))
-    router.push('/camera')
+    if (globalStates.selectedExercise == null) {
+        globalStates.setSelectedExercise(JSON.stringify(selectedExercise.value))
+        router.push('/camera')
+    }
 }
 
 const modal = ref(false)

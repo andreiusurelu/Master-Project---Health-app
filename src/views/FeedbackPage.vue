@@ -38,7 +38,7 @@ const feedback = reactive({
 })
 
 
-const selectedExercise = JSON.parse(localStorage.getItem('selectedExercise'))
+const selectedExercise = JSON.parse(globalStates.selectedExercise)
 
 const checkReps = computed(() => feedback.done_reps == selectedExercise.noReps)
 
@@ -50,10 +50,6 @@ const submitFeedback = async () => {
     globalStates.addExercise(selectedExercise.id)
   }
   const landmarksList = JSON.parse(localStorage.getItem('landmarksList'))
-  localStorage.setItem(
-    'feedback',
-    JSON.stringify({exercise: selectedExercise.name, feedback: feedback})
-  )
 
   if (feedback.rir == '') {
     feedback.rir = 0
@@ -65,7 +61,9 @@ const submitFeedback = async () => {
     rir: feedback.rir,
     sessionData: landmarksList
   })
+
   if (response.success) {
+    globalStates.setSelectedExercise(null)
     alert('Form was saved!')
     router.push('/cards')
   }

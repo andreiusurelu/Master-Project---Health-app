@@ -14,6 +14,7 @@ class CameraSDK extends EventTarget {
         this.canvasElement = null;
         this.canvasCtx = null;
         this.drawingUtils = null;
+        this.toClean = false;
     }
 
     async init() {
@@ -25,12 +26,11 @@ class CameraSDK extends EventTarget {
         this.canvasElement = document.getElementById('canvasOverlay');
         if (this.canvasElement) {
             this.canvasCtx = this.canvasElement.getContext('2d');
+            this.drawingUtils = new DrawingUtils(this.canvasCtx)
         }
         else {
             console.error("Couldn't find canvasOverlay");
         }
-        this.canvasElement.width = 640;
-        this.canvasElement.height = 480;
     }
 
     async initModel() {
@@ -74,7 +74,13 @@ class CameraSDK extends EventTarget {
 
         if (this.isDetecting) {
             if (display) {
+                this.canvasElement.width = video.videoWidth;
+                this.canvasElement.height = video.videoHeight;
                 this.displayVideoResult(this.previousLandmarks)
+            }
+            else if (this.toClean) {
+                this.canvasCtx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+                this.toClean = false;
             }
             return null;
         }
@@ -84,7 +90,13 @@ class CameraSDK extends EventTarget {
                 this.video = video;
                 const poseLandmarkerResult = this.poseLandmarker.detectForVideo(video, timestamp);
                 if (display) {
+                    this.canvasElement.width = video.videoWidth;
+                    this.canvasElement.height = video.videoHeight;
                     this.displayVideoResult(poseLandmarkerResult);
+                }
+                else {
+                    this.canvasCtx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+                    this.toClean = false
                 }
                 this.previousLandmarks = poseLandmarkerResult;
                 this.isDetecting = false
@@ -121,33 +133,26 @@ class CameraSDK extends EventTarget {
     }
 
     displayVideoResult(result) {
-        if (this.canvasElement) {
 
-            this.canvasCtx.save();
-            this.canvasCtx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+        this.canvasCtx.save();
+        this.canvasCtx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
 
 
-            this.canvasCtx.beginPath();
-            this.canvasCtx.rect(0, 0, this.canvasElement.width, this.canvasElement.height);
-            this.canvasCtx.clip();
+        this.canvasCtx.beginPath();
+        this.canvasCtx.rect(0, 0, this.canvasElement.width, this.canvasElement.height);
+        this.canvasCtx.clip();
 
-            if (result.landmarks) {
-                if (!this.drawingUtils) this.drawingUtils = new DrawingUtils(this.canvasCtx);
-                else this.drawingUtils = new DrawingUtils(this.canvasCtx);
+        if (result.landmarks) {
 
-                for (const landmark of result.landmarks) {
-                    this.drawingUtils.drawLandmarks(landmark, {
-                    radius: (data) => DrawingUtils.lerp(data.from.z, -0.15, 0.1, 5, 1),
-                    });
-                    this.drawingUtils.drawConnectors(landmark, PoseLandmarker.POSE_CONNECTIONS);
-                }
+            for (const landmark of result.landmarks) {
+                this.drawingUtils.drawLandmarks(landmark, {
+                radius: (data) => DrawingUtils.lerp(data.from.z, -0.15, 0.1, 5, 1),
+                });
+                this.drawingUtils.drawConnectors(landmark, PoseLandmarker.POSE_CONNECTIONS);
             }
-            this.canvasCtx.restore();
         }
-        else {
-            this.setupCanvas();
-            this.displayVideoResult(result);
-        }
+        this.canvasCtx.restore();
+        this.toClean = true;
     }
 
     stopSDK() {

@@ -19,5 +19,9 @@ export const globalStates = reactive ({
         return this.exerciseList.length == 3
     },
     exerciseListLoaded: false,
-    detectionState: {NO_HISTORY: 1, MOVE: 2, VISIBLE: 3}
+    detectionState: {NO_HISTORY: 1, MOVE: 2, VISIBLE: 3},
+    selectedExercise: null,
+    setSelectedExercise(exercise) {
+        this.selectedExercise = this.selectedExercise
+    }
 })

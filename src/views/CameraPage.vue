@@ -1,5 +1,4 @@
 <template>
-  <div class="container">
 
     <div class="video-wrapper" :style="{borderColor: borderColor}">
         <video
@@ -22,14 +21,17 @@
       <div v-else>
         <BButton
         variant="secondary"
-        class="btn"
         aria-label="Record"
         v-on:click="startRecording">
           <IBiRecordCircle class="icon"/>
         </BButton>
       </div>
+      <BButton
+        :variant="isDisplay ? 'secondary' : 'primary'" aria-label="DrawSwitch"
+        style="left: 80%; width: 40px; height: 40px;" v-on:click="isDisplay = !isDisplay">
+        <IBiPersonArmsUp class="icon" style="width: 80%; height: 80%;"/>
+      </BButton>
     </div>
-  </div>
 </template>
 
 <script setup>
@@ -40,7 +42,6 @@ import { BButton } from 'bootstrap-vue-next'
 import router from '../router'
 import { globalStates } from '../components/state.js'
 import { constants } from '../components/constants.js'
-import IBi0Circle from '~icons/bi/0-circle'
 
 
 const videoRef = ref(null)
@@ -50,6 +51,7 @@ let detectionInterval = null
 const feedbackState = ref(null)
 const landmarksList = ref([])
 const isRecording = ref(false)
+const isDisplay = ref(true)
 let notDetecting = true
 
 const startCamera = async () => {
@@ -57,12 +59,16 @@ const startCamera = async () => {
     stream = await navigator.mediaDevices.getUserMedia({
       video: {
         facingMode: 'user',
-        width: { ideal: 1280 },
-        height: { ideal: 720 }
+        width: { min: 640, ideal: 1280, max: 2550 },
+        height: { min: 480, ideal: 720, max: 1440 },
+        frameRate: {min: 5, ideal: 10, max: 15},
+        resizeMode: 'crop-and-scale'
       }
     });
 
     videoRef.value.srcObject = stream;
+
+    CameraSDK.setupCanvas()
 
     detectionInterval = setInterval(async () => renderLoop(), constants.timeInterval)
 
@@ -111,15 +117,25 @@ const borderColor = computed(() => {
   }
 })
 
+const setToFullScreen = (video) => {
+  if (video.requestFullScreen) {
+    video.requestFullScreen()
+  }
+  else if (video.webkitRequestFullscreen) {
+    video.webkitRequestFullscreen()
+  }
+  else if (video.msRequestFullscreen) {
+    video.msRequestFullscreen()
+  }
+}
+
 const renderLoop = async () => {
   const video = videoRef.value
   if (video) {
     if (video.videoHeight > 0 && video.videoWidth > 0) {
-      video.height = video.videoHeight;
-      video.width = video.videoWidth;
-
+      // setToFullScreen(video)
       try {
-        const predictedLandmarks = await CameraSDK.detectStream(video, true)
+        const predictedLandmarks = await CameraSDK.detectStream(video, isDisplay.value)
         const cameraState = CameraSDK.checkPreviousLandmarks()
         feedbackState.value = cameraState == null ? globalStates.detectionState['NO_HISTORY'] : cameraState;
         feedbackState.value = cameraState
@@ -130,6 +146,9 @@ const renderLoop = async () => {
       catch (error) {
         console.log(error)
       }
+    }
+    else {
+      console.log('INVALID HEIGHT AND WIDTH')
     }
   }
 }
@@ -153,15 +172,19 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.container {
-  padding: 20px;
-}
 
 .video-wrapper {
-  position: relative;
-  width: 1024px;
-  height: 720px;
-  border: 5px solid grey;
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  transform: translateX(-50%) translateY(-50%);
+  border: 10px solid red;
+  overflow: hidden;
 }
 
 .buttons {
@@ -169,13 +192,21 @@ onUnmounted(() => {
 }
 
 video, canvas {
+  object-fit: cover;
   position: absolute;
   width: 100%;
   height: 100%;
+  inset: 0;
 }
 
 canvas {
   pointer-events: none; /* lets clicks go through to video */
+}
+
+.btn .right {
+  width: 40px;
+  height: 40px;
+  left: 80%;
 }
 
 .btn {
@@ -187,6 +218,7 @@ canvas {
   position: absolute;
   bottom: 5px;
   left: 50%;
+  transform: translateX(-50%);
   width: 50px;
   height: 50px;
 }
