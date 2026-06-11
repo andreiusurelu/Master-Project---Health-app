@@ -13,6 +13,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import CameraSDK from './components/camera_sdk.js'
+import { globalStates } from './components/state.js';
 
 onMounted(async() =>{
   await CameraSDK.init()

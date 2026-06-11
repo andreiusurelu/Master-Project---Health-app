@@ -48,6 +48,7 @@ const videoRef = ref(null)
 
 let stream = null
 let detectionInterval = null
+let frameCallbackHandle = null
 const feedbackState = ref(null)
 const landmarksList = ref([])
 const isRecording = ref(false)
@@ -70,7 +71,7 @@ const startCamera = async () => {
 
     CameraSDK.setupCanvas()
 
-    detectionInterval = setInterval(async () => renderLoop(), constants.timeInterval)
+    await renderLoop()
 
   } catch (err) {
     alert('Camera permission denied')
@@ -95,7 +96,8 @@ const stopCamera = () => {
     stream = null
   }
 
-  if (videoRef.value) {
+  if (videoRef.value && frameCallbackHandle) {
+    videoRef.value.cancelVideoFrameCallback(frameCallbackHandle)
     videoRef.value.srcObject = null
   }
   if (detectionInterval) {
@@ -117,23 +119,11 @@ const borderColor = computed(() => {
   }
 })
 
-const setToFullScreen = (video) => {
-  if (video.requestFullScreen) {
-    video.requestFullScreen()
-  }
-  else if (video.webkitRequestFullscreen) {
-    video.webkitRequestFullscreen()
-  }
-  else if (video.msRequestFullscreen) {
-    video.msRequestFullscreen()
-  }
-}
 
 const renderLoop = async () => {
   const video = videoRef.value
   if (video) {
     if (video.videoHeight > 0 && video.videoWidth > 0) {
-      // setToFullScreen(video)
       try {
         const predictedLandmarks = await CameraSDK.detectStream(video, isDisplay.value)
         const cameraState = CameraSDK.checkPreviousLandmarks()
@@ -150,6 +140,7 @@ const renderLoop = async () => {
     else {
       console.log('INVALID HEIGHT AND WIDTH')
     }
+    frameCallbackHandle = video.requestVideoFrameCallback(renderLoop)
   }
 }
 
