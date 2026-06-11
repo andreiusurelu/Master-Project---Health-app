@@ -71,7 +71,7 @@ const form = reactive({
   sex: null,
   height: '',
   weight: '',
-  level: ''
+  level: null
 })
 
 const show = ref(true)
@@ -123,6 +123,7 @@ const resetForm = () => {
   form.height = ''
   form.sex = null
   form.weight = ''
+  form.level = null
 
   show.value = false
   nextTick(() => {
