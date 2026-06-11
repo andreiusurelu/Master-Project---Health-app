@@ -154,6 +154,7 @@ const renderLoop = async () => {
 }
 
 onBeforeMount(async () => {
+  // in case we still haven't loaded the model
   if (!globalStates.modelLoaded) {
     await CameraSDK.init()
     globalStates.setModelLoaded(true)
