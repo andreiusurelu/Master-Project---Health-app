@@ -1,6 +1,6 @@
 <template>
 
-    <div class="video-wrapper" :style="{borderColor: borderColor}">
+    <div id="videoWrapper" class="video-wrapper">
         <video
         ref="videoRef"
         autoplay
@@ -9,6 +9,11 @@
       ></video>
       <canvas id="canvasOverlay">
       </canvas>
+      <div v-show="isMobile">
+        <BButton class="btn left" v-on:click="switchCamera" :disabled="isRecording">
+          <IBiArrowRepeat class="icon small"/>
+        </BButton>
+      </div>
       <div v-if="isRecording">
         <BButton
         variant="danger"
@@ -28,38 +33,55 @@
       </div>
       <BButton
         :variant="isDisplay ? 'secondary' : 'primary'" aria-label="DrawSwitch"
-        style="left: 80%; width: 40px; height: 40px;" v-on:click="isDisplay = !isDisplay">
-        <IBiPersonArmsUp class="icon" style="width: 80%; height: 80%;"/>
+        class="btn right" v-on:click="isDisplay = !isDisplay">
+        <IBiPersonArmsUp class="icon small"/>
       </BButton>
     </div>
 </template>
 
 <script setup>
 import { onBeforeMount, onMounted, onUnmounted, ref, computed } from 'vue'
-import { PoseLandmarker, FilesetResolver, DrawingUtils } from '@mediapipe/tasks-vision'
 import CameraSDK from '../components/camera_sdk.js'
 import { BButton } from 'bootstrap-vue-next'
 import router from '../router'
-import { globalStates } from '../components/state.js'
-import { constants } from '../components/constants.js'
+
+import { useFitnessStore } from '../components/states/fitness_data.js'
 
 
 const videoRef = ref(null)
 
+const store = useFitnessStore()
+
 let stream = null
-let detectionInterval = null
 let frameCallbackHandle = null
-const feedbackState = ref(null)
-const landmarksList = ref([])
 const isRecording = ref(false)
 const isDisplay = ref(true)
-let notDetecting = true
+const isMobile = ref(false)
+const isFaceCamera = ref(true)
+
+const checkEnvironmentCamera = async () => {
+  try {
+    const testStream = await navigator.mediaDevices.getUserMedia({
+      video: {
+        facingMode: { exact: "environment" } 
+      }
+    });
+
+    testStream.getTracks().forEach(track => track.stop());
+
+    isMobile.value = true;
+  }
+  catch (e) {
+    isMobile.value = false;
+  }
+}
 
 const startCamera = async () => {
   try {
+
     stream = await navigator.mediaDevices.getUserMedia({
       video: {
-        facingMode: 'user',
+        facingMode: isFaceCamera.value ? 'user' : 'environment',
         width: { min: 640, ideal: 1280, max: 2550 },
         height: { min: 480, ideal: 720, max: 1440 },
         frameRate: {min: 5, ideal: 10, max: 15},
@@ -69,24 +91,35 @@ const startCamera = async () => {
 
     videoRef.value.srcObject = stream;
 
-    CameraSDK.setupCanvas()
+    CameraSDK.initCanvas();
 
-    await renderLoop()
+    await new Promise(resolve =>
+    {
+      videoRef.value.onloadedmetadata = resolve;
+    }
+    );
+
+    await videoRef.value.play();
+
+    await renderLoop();
 
   } catch (err) {
-    alert('Camera permission denied')
+    alert('Error when starting camera. Check logs.')
+    console.log(err)
   }
 }
 
 const startRecording = () => {
-  isRecording.value = true
+  isRecording.value = true;
+  CameraSDK.startRecording();
 }
 
 const stopRecording = () => {
-  if (isRecording.value && landmarksList.value.length > 0) {
-    localStorage.setItem('landmarksList', JSON.stringify(landmarksList.value))
-    isRecording.value = false
-    router.push('/feedback')
+  const landmarksList = CameraSDK.stopRecording();
+  if (landmarksList.length > 0) {
+    isRecording.value = false;
+    store.setFitnessSessionData(landmarksList);
+    router.push('/feedback');
   }
 }
 
@@ -100,38 +133,15 @@ const stopCamera = () => {
     videoRef.value.cancelVideoFrameCallback(frameCallbackHandle)
     videoRef.value.srcObject = null
   }
-  if (detectionInterval) {
-    clearInterval(detectionInterval)
-    detectionInterval = null
-  }
 }
 
-const borderColor = computed(() => {
-  switch (feedbackState.value) {
-    case globalStates.detectionState['NO_HISTORY']:
-      return 'grey'
-    case globalStates.detectionState['MOVE']:
-      return 'red'
-    case globalStates.detectionState['VISIBLE']:
-      return 'green'
-    default:
-      return 'grey'
-  }
-})
 
-
-const renderLoop = async () => {
+const renderLoop = async (now, metadata) => {
   const video = videoRef.value
   if (video) {
     if (video.videoHeight > 0 && video.videoWidth > 0) {
       try {
-        const predictedLandmarks = await CameraSDK.detectStream(video, isDisplay.value)
-        const cameraState = CameraSDK.checkPreviousLandmarks()
-        feedbackState.value = cameraState == null ? globalStates.detectionState['NO_HISTORY'] : cameraState;
-        feedbackState.value = cameraState
-        if (predictedLandmarks && isRecording.value && cameraState == globalStates.detectionState['VISIBLE']) {
-          landmarksList.value.push(predictedLandmarks)
-        }
+        await CameraSDK.detectStream(video, isDisplay.value)
       }
       catch (error) {
         console.log(error)
@@ -144,17 +154,26 @@ const renderLoop = async () => {
   }
 }
 
+const switchCamera = () => {
+  console.log('Switching camera!');
+  isFaceCamera.value = !isFaceCamera.value;
+  stopCamera();
+  startCamera();
+}
+
 onBeforeMount(async () => {
-  // in case we still haven't loaded the model
-  if (!globalStates.modelLoaded) {
-    await CameraSDK.init()
-    globalStates.setModelLoaded(true)
-  }
+  console.log('Check if mobile');
+  checkEnvironmentCamera();
 })
 
+
 onMounted(async () => {
-  console.log('Starting camera')
-  await startCamera()
+  console.log('Setting up video wrapper');
+  CameraSDK.initVideoWrapper();
+  console.log('Setting up the canvas');
+  CameraSDK.initCanvas();
+  console.log('Starting camera');
+  await startCamera();
 })
 
 onUnmounted(() => {
@@ -173,7 +192,6 @@ onUnmounted(() => {
   left: 50%;
   width: auto;
   height: auto;
-  z-index: -100;
   transform: translateX(-50%) translateY(-50%);
   border: 10px solid red;
   overflow: hidden;
@@ -191,14 +209,25 @@ video, canvas {
   inset: 0;
 }
 
+video {
+  z-index: 1;
+}
+
 canvas {
+  z-index: 2;
   pointer-events: none; /* lets clicks go through to video */
 }
 
-.btn .right {
+.btn.right {
   width: 40px;
   height: 40px;
   left: 80%;
+}
+
+.btn.left {
+  width: 40px;
+  height: 40px;
+  left: 20%;
 }
 
 .btn {
@@ -213,10 +242,16 @@ canvas {
   transform: translateX(-50%);
   width: 50px;
   height: 50px;
+  z-index: 2;
 }
 
 .icon {
   width: 100%;
   height: 100%;
+}
+
+.icon.small {
+  width: 80%;
+  height: 80%;
 }
 </style>

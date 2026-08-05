@@ -9,7 +9,8 @@ export default defineConfig({
   plugins: [
     vue(),
     VitePWA({
-      registerType: 'generateSW',
+      registerType: 'autoUpdate',
+      strategies: 'generateSW',
       // srcDir: 'src',
       // filename: 'registerServiceWorker.js',
       includeAssets: ['favicon.ico'],
@@ -34,6 +35,7 @@ export default defineConfig({
         ]
       },
       workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
       runtimeCaching: [
         {
           urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,

@@ -46,10 +46,11 @@
 </template>
 
 <script setup>
-import { reactive, computed, nextTick, ref, onBeforeMount } from 'vue'
+import { reactive, computed, nextTick, ref } from 'vue'
 import router from '../router'
 import { supabase } from '../components/client_data'
 import { BButton, BForm, BFormInput, BFormGroup, BFormInvalidFeedback, BFormRadio, BFormRadioGroup, BFormSelect } from 'bootstrap-vue-next'
+import { constants } from '../components/constants/constants'
 
 const levels = [
   {
@@ -76,27 +77,9 @@ const form = reactive({
 
 const show = ref(true)
 
-const validateAge = computed(() => form.age >= 10 && form.age <= 99)
-const validateWeight = computed(() => form.weight >= 10 && form.weight <= 199)
-const validateHeight = computed(() => form.height >= 100 && form.height <= 250)
-
-onBeforeMount(async () => {
-  try {
-    const { data, error, status } = await supabase.from('UserData').select("*")
-    if (error && status !== 406) {
-      throw error
-    }
-
-    if (data !== null && data.length > 0 && status == 200) {
-      router.push('/cards')
-    }
-  }
-  catch (error) {
-    console.log(error)
-    alert('Error when checking user form!')
-  }
-  
-})
+const validateAge = computed(() => form.age >= constants.minAge && form.age <= constants.maxAge)
+const validateWeight = computed(() => form.weight >= constants.minWeight && form.weight <= constants.maxWeight)
+const validateHeight = computed(() => form.height >= constants.minHeight && form.height <= constants.maxHeight)
 
 const submitForm = async () => {
   const response = await supabase.from('UserData').upsert({

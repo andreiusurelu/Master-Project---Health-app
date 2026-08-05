@@ -1,4 +1,5 @@
 import { createApp} from 'vue'
+import { createPinia } from 'pinia'
 import App from './App.vue'
 import { createBootstrap } from 'bootstrap-vue-next'
 
@@ -10,4 +11,5 @@ import './registerServiceWorker'
 
 createApp(App)
   .use(router, createBootstrap())
+  .use(createPinia())
   .mount('#app')

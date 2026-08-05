@@ -13,6 +13,7 @@
     "@tensorflow/tfjs": "^4.22.0",
     "bootstrap": "^5.3.8",
     "bootstrap-vue-next": "^0.45.4",
+    "pinia": "^3.0.4",
     "register-service-worker": "^1.7.2",
     "vue": "^3.5.35",
     "vue-router": "^5.1.0"
@@ -20,7 +21,7 @@
   "devDependencies": {
     "@iconify-json/bi": "^1.2.7",
     "@vitejs/plugin-vue": "^6.0.6",
-    "@vue/cli-plugin-pwa": "~5.0.0",
+    "@vue/cli-plugin-pwa": "^3.12.1",
     "@vue/compiler-sfc": "^3.5.35",
     "unplugin-icons": "^23.0.1",
     "unplugin-vue-components": "^32.1.0",

@@ -19,7 +19,6 @@ import { ref } from 'vue'
 import { BButton, BForm, BFormInput, BFormGroup, BFormInvalidFeedback } from 'bootstrap-vue-next'
 import router from '../router'
 import { supabase } from '../components/client_data.js'
-import { globalStates } from '../components/state.js'
 
 
 const emailAddress = ref('')

@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav v-if="!$route.meta.fullscreen">
-      <router-link to="/">Home</router-link>
+      <router-link to="/home">Home</router-link>
       |
       <router-link to="/about">About</router-link>
     </nav>
@@ -13,11 +13,9 @@
 <script setup>
 import { onMounted } from 'vue'
 import CameraSDK from './components/camera_sdk.js'
-import { globalStates } from './components/state.js';
 
 onMounted(async() =>{
   await CameraSDK.init()
-  globalStates.setModelLoaded(true)
 })
 </script>
 

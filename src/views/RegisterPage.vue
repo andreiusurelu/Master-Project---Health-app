@@ -17,7 +17,8 @@
                     type="password" required :state="validateRepeatPassword"/>
                 <BFormInvalidFeedback :state="validateRepeatPassword">Password doesn't match</BFormInvalidFeedback>
             </BFormGroup>
-            <p class="error" v-if="errDetected">{{ errMessage }}</p>
+            <p class="error" v-show="errDetected">{{ errMessage }}</p>
+            <p  class="info" v-show="showMessage">{{ message }}</p>
             <BButton variant="primary" type="submit">Submit</BButton>
         </BForm>
     </div>
@@ -28,8 +29,7 @@ import { ref, computed, reactive } from 'vue'
 import { BButton, BForm, BFormInput, BFormGroup, BFormInvalidFeedback } from 'bootstrap-vue-next'
 import router from '../router'
 import { supabase } from '../components/client_data.js'
-import { globalStates } from '../components/state.js'
-import { constants } from '../components/constants.js'
+import { constants } from '../components/constants/constants.js'
 
 const userData = reactive({
     emailAddress: '',
@@ -39,6 +39,9 @@ const userData = reactive({
 
 const errDetected = ref(false)
 const errMessage = ref('')
+
+const showMessage = ref(false)
+const message = ref('')
 
 const errorMessage = (error) => {
     if (error instanceof AuthApiError) {
@@ -83,7 +86,12 @@ const submit = async () => {
         console.log(error)
         return
     }
-    router.push('/userForm')
+    else {
+        showMessage.value = true
+        message.value = 'Check your email!'
+        return
+    }
+    setTimeout(() => router.push('/login'), 5000)
 }
 
 </script>

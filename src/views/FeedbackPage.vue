@@ -8,7 +8,7 @@
         <BFormInput id="no-reps-input" v-model="feedback.done_reps"
         type="number" placeholder="eg. 20" required :state="validateDoneReps"/>
         <BFormInvalidFeedback :state="validateDoneReps">
-          You should have completed between 1 and {{ selectedExercise.noReps }} repetitions.
+          You should have completed between 1 and {{ store.noReps }} repetitions.
         </BFormInvalidFeedback>
     </BFormGroup>
     <BFormGroup id ="rir-group" label="Extra number of reps:" label-for="rir-input"
@@ -25,45 +25,49 @@
 </template>
 
 <script setup>
-import { reactive, computed } from 'vue'
+import { reactive, computed, ref, onBeforeMount } from 'vue'
 import { BButton, BForm, BFormInput, BFormGroup, BFormInvalidFeedback } from 'bootstrap-vue-next'
-import { globalStates } from '../components/state'
 import { supabase } from '../components/client_data'
 import router from '../router'
 import CameraSDK from '../components/camera_sdk'
+import { useFitnessStore } from '../components/states/fitness_data'
 
 const feedback = reactive({
   done_reps: '',
   rir: ''
 })
 
+const store = useFitnessStore()
 
-const selectedExercise = JSON.parse(globalStates.selectedExercise)
+const selectedExercise = ref(null)
+const landmarksList = ref(null)
 
-const checkReps = computed(() => feedback.done_reps == selectedExercise.noReps)
 
-const validateDoneReps = computed(() => feedback.done_reps > 0 && feedback.done_reps <= selectedExercise.noReps)
+const checkReps = computed(() => feedback.done_reps == selectedExercise.value.noReps)
+
+const validateDoneReps = computed(() => feedback.done_reps > 0 && feedback.done_reps <= selectedExercise.value.noReps)
 const validateRIR = computed(() => feedback.rir > 0 && feedback.rir <= 10)
 
+onBeforeMount(() => {
+  selectedExercise.value = store.selectedExercise;
+  landmarksList.value = store.fitnessSessionData;
+})
+
 const submitFeedback = async () => {
-  if (globalStates.exerciseListLoaded) {
-    globalStates.addExercise(selectedExercise.id)
-  }
-  const landmarksList = JSON.parse(localStorage.getItem('landmarksList'))
 
   if (feedback.rir == '') {
     feedback.rir = 0
   }
 
   const response = await supabase.from('UserFitnessSession').insert({
-    exerciseName: selectedExercise.name,
+    exerciseName: store.name,
     noReps: feedback.done_reps,
     rir: feedback.rir,
-    sessionData: landmarksList
+    sessionData: landmarksList.value
   })
 
   if (response.success) {
-    globalStates.setSelectedExercise(null)
+    localStorage.removeItem('selectedExercise');
     alert('Form was saved!')
     router.push('/cards')
   }
@@ -72,15 +76,6 @@ const submitFeedback = async () => {
     console.log(response)
     return
   }
-  if(globalStates.isExerciseListFull()) {
-    CameraSDK.stopSDK()
-    alert('All done!')
-  }
-  else {
-    router.push('/cards')
-  }
-
-  alert('Feedback submitted')
 }
 </script>
 

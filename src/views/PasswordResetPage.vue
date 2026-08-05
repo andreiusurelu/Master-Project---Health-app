@@ -30,8 +30,7 @@ import { ref, reactive, computed, watch } from 'vue'
 import { BButton, BForm, BFormInput, BFormGroup, BFormInvalidFeedback } from 'bootstrap-vue-next'
 import router from '../router/index.js'
 import { supabase, authEvent, authSession } from '../components/client_data.js'
-import { globalStates } from '../components/state.js'
-import { constants } from '../components/constants.js'
+import { constants } from '../components/constants/constants.js'
 
 
 const resetData = reactive({
