@@ -1,0 +1,136 @@
+{
+    "login" : {
+        "welcome": "Wilkommen! Bitte melden Sie an",
+        "noAccount": "Noch kein Konto?",
+        "passwordForgot": "Passwort vergessen?",
+        "error": {
+            "400": "Fehler bei der Authentifizierungsanfrage, möglicherweise eine ungültige Anfrage.",
+            "422": "Fehler bei der Verarbeitung der Authentifizierungsanfrage.",
+            "429": "Problem beim Senden der E-Mail. Bitte versuche es erneut.",
+            "500": "Serverfehler. Bitte kontaktiere einen Administrator.",
+            "unknown": "Unbekannter Fehler. Bitte kontaktiere einen Administrator.",
+            "session": "Fehler beim Erstellen einer Sitzung. Bitte kontaktiere einen Administrator."
+        }
+    },
+    "register": {
+        "error": {
+            "password": "Das Passwort muss zwischen 8 und 24 Zeichen lang sein und mindestens eine Zahl und einen Buchstaben enthalten.",
+            "passwordRepeat": "Die Passwörter stimmen nicht überein.",
+            "400": "Fehler bei der Registrierungsanfrage, möglicherweise eine ungültige Anfrage.",
+            "422": "Fehler bei der Verarbeitung der Registrierungsanfrage.",
+            "429": "Problem beim Senden der E-Mail. Bitte versuche es erneut.",
+            "500": "Serverfehler. Bitte kontaktiere einen Administrator.",
+            "unknown": "Unbekannter Fehler. Bitte kontaktiere einen Administrator.",
+            "session": "Fehler beim Erstellen einer Sitzung. Bitte kontaktiere einen Administrator."
+        },
+        "emailCheck": "Überprüfe deine E-Mail!"
+    },
+    "userForm": {
+        "age": {
+        "label": "Alter:",
+        "invalid": "Dein Alter muss zwischen {min} und {max} liegen.",
+        "description": "Dein aktuelles Alter",
+        "placeholder": "z. B. 20 Jahre"
+        },
+        "sex": {
+        "label": "Geschlecht:",
+        "description": "Dein Geschlecht",
+        "male": "Männlich",
+        "female": "Weiblich"
+        },
+        "level": {
+        "label": "Niveau:",
+        "description": "Dein Fitnessniveau",
+        "options": {
+            "beginner": "Anfänger",
+            "intermediary": "Mittelstufe",
+            "advanced": "Fortgeschrittene",
+            "chooseOption": "Bitte wähle eine Option"
+        }
+        },
+        "weight": {
+        "label": "Gewicht:",
+        "description": "Dein aktuelles Gewicht (in Kilogramm)",
+        "placeholder": "z. B. 80 kg",
+        "invalid": "Dein Gewicht sollte zwischen {min} und {max} Kilogramm liegen."
+        },
+        "height": {
+        "label": "Größe:",
+        "description": "Deine Körpergröße (in Zentimetern)",
+        "placeholder": "z. B. 175 cm",
+        "invalid": "Deine Körpergröße sollte zwischen {min} und {max} Zentimetern liegen."
+        }
+    },
+    "email": {
+        "label": "E-Mail-Adresse:",
+        "invalidFormat": "Ungültiges E-Mail-Format",
+        "placeholder": "z. B. ion_popa\\@mail.com"
+    },
+    "password": {
+        "label": "Passwort:",
+        "repeat": "Passwort wiederholen:",
+        "reset": {
+        "emailCheck": "Überprüfe deine E-Mail auf den Link zum Zurücksetzen des Passworts.",
+        "error": {
+            "sendEmail": "Beim Senden der Anfrage zum Zurücksetzen des Passworts ist ein Fehler aufgetreten.",
+            "format": "Das Passwort muss zwischen 8 und 24 Zeichen lang sein und mindestens eine Zahl und einen Buchstaben enthalten.",
+            "repeat": "Die Passwörter stimmen nicht überein."
+        }
+        }
+    },
+    "fitnessCard": {
+        "modal": {
+        "title": "Anweisungen",
+        "select": "Auswählen",
+        "cancel": "Abbrechen",
+        "body": "<p><b>Bevor du fortfährst, lies bitte die folgenden Anweisungen:</b></p><p>Es wird vorausgesetzt, dass du für diese Sitzung bereits aufgewärmt bist. Falls nicht, klicke auf Abbrechen und kehre zurück, nachdem du dich aufgewärmt hast.</p><p>Du musst {noReps} Wiederholungen von {title} machen.</p><p>Du musst die Aufnahmetaste drücken und dich vor der Kamera positionieren, <b>bis der Rand des Bildschirms grün wird</b>.</p><p>Du beginnst dann mit dem ausgewählten Übungsprogramm und führst bis zu {noReps} Wiederholungen aus.</p><p>Wenn du fertig bist, drücke die Aufnahmetaste, um die Sitzung zu beenden, und fülle anschließend das Feedbackformular aus.</p><p><b>Durch Drücken der OK-Taste bestätigst du, dass du die Anweisungen gelesen hast.</b></p>"
+        },
+        "itemSubtitle": "Anzahl der Wiederholungen: {noReps}"
+    },
+    "fitnessExercises": {
+        "abs": {
+        "title": "Sit-ups",
+        "description": "Du musst Sit-ups machen, um das Fitnessniveau deiner Bauchmuskulatur zu bestimmen. <b>Es wird empfohlen, dich seitlich zur Kamera zu positionieren.</b>"
+        },
+        "pushups": {
+        "title": "Liegestütze",
+        "description": "Du musst Liegestütze machen, um das Fitnessniveau deiner Brustmuskulatur zu bestimmen. <b>Es wird empfohlen, dich seitlich zur Kamera zu positionieren.</b>"
+        },
+        "squats": {
+        "title": "Kniebeugen",
+        "description": "Du musst Kniebeugen machen, um das Fitnessniveau deiner Beinmuskulatur zu bestimmen. <b>Es wird empfohlen, dich frontal zur Kamera zu positionieren.</b>"
+        }
+    },
+    "feedback": {
+        "noReps": {
+        "label": "Anzahl der Wiederholungen:",
+        "description": "Wie viele Wiederholungen hast du gemacht?",
+        "invalid": "Du hättest zwischen 1 und {noReps} Wiederholungen machen sollen.",
+        "placeholder": "z. B. 20"
+        },
+        "rir": {
+        "label": "Anzahl zusätzlicher Wiederholungen:",
+        "description": "Wie viele weitere Wiederholungen hättest du noch machen können?",
+        "invalid": "Du solltest noch zwischen 1 und {maxLimit} Wiederholungen schaffen können.",
+        "placeholder": "z. B. noch 5"
+        }
+    },
+    "endSurvey": "<h3>Vielen Dank!</h3>Wir möchten uns bei dir für das Ausfüllen dieser Umfrage bedanken! Bleibe auf dem Laufenden über zukünftige Updates!",
+    "submit": "Absenden",
+    "reset": "Zurücksetzen",
+    "process": "Wird geladen...",
+    "home": "Startseite",
+    "profile": "Profil",
+    "language": {
+        "title": "Sprache",
+        "en": "Englisch",
+        "ro": "Rumänisch",
+        "de": "Deutsch"
+    },
+    "signOut": "Abmelden",
+    "about": {
+        "title": "Über uns",
+        "body": "<h3>Wer sind wir?</h3>Wir sind ein Team der Politehnica Universität Bukarest und erforschen die Anwendung von Computer-Vision-Algorithmen im Sport. <h3>Was ist das Ziel der Studie?</h3>Das Ziel unserer Forschung ist es, körperliche Ermüdung zu bestimmen und sie mit der wahrgenommenen psychologischen Ermüdung zu korrelieren. <h3>Was kann ich erwarten?</h3>Wir erwarten, dass du als Nutzer die bereitgestellten Anweisungen befolgst. Das Übungsprogramm kann von jedem durchgeführt werden, unabhängig vom Fitnessniveau."
+    }
+    
+}

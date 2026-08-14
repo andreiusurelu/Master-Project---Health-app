@@ -33,7 +33,7 @@ const routes = [
     path: '/userForm',
     name: 'userForm',
     component: UserForm,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, topbar: true },
     beforeEnter: async(to, from) => {
       const { data, error, status } = await supabase.from('UserData').select("*");
       if (error) {
@@ -56,19 +56,19 @@ const routes = [
     path: '/camera',
     name: 'camera',
     component: CameraPage,
-    meta: { requiresAuth: true, fullscreen: true }
+    meta: { requiresAuth: true }
   },
   {
     path: '/feedback',
     name: 'feedback',
     component: FeedbackPage,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true, topbar: true }
   },
   {
     path: '/cards',
     name: 'cards',
     component: FitnessCardPage,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, topbar: true },
     beforeEnter: async (to, from) => {
       const {data, error, status} = await supabase.from('UserFitnessSession').select('exerciseName');
       if (error) {
@@ -112,12 +112,21 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    component: AboutPage
+    component: AboutPage,
+    meta: { topbar: true }
   },
   {
     path: '/endSurvey',
     name: 'endSurvey',
-    component: EndSurveyPage
+    component: EndSurveyPage,
+    meta: { requiresAuth: true, topbar: true },
+    beforeEnter: () => {
+      const store = useFitnessStore();
+      if (!store.allSelected) {
+        return '/cards';
+      }
+      return true;
+    }
   }
 ]
 

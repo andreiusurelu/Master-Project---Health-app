@@ -2,24 +2,24 @@
     <div class="container">
         <h2>Register <Form></Form></h2>
         <BForm @submit.prevent="submit">
-            <BFormGroup id="email-group" label="Email address:" label-for="email-input">
+            <BFormGroup id="email-group" :label="$t('email.label')" label-for="email-input">
                 <BFormInput id="email-input" v-model="userData.emailAddress" type="email"
-                placeholder="eg. joe_doe@mail.com" required :state="validateEmail"/>
-                <BFormInvalidFeedback :state="validateEmail">Invalid email address format</BFormInvalidFeedback>
+                :placeholder="$t('email.placeholder')" required :state="validateEmail"/>
+                <BFormInvalidFeedback :state="validateEmail">{{ $t('email.invalidFormat') }}</BFormInvalidFeedback>
             </BFormGroup>
-            <BFormGroup id="password-group" label="Password:" label-for="password-input">
+            <BFormGroup id="password-group" :label="$t('password.label')" label-for="password-input">
                 <BFormInput id="password-input" v-model="userData.password" type="password" required
                     :state="validatePassword"/>
-                <BFormInvalidFeedback :state="validatePassword">Password must be between 8 and 24 characters and have at least one number and one letter.</BFormInvalidFeedback>
+                <BFormInvalidFeedback :state="validatePassword">{{ $t('register.error.password') }}</BFormInvalidFeedback>
             </BFormGroup>
-            <BFormGroup id="password-repeat-group" label="Repeat password:" label-for="repeat-password-input">
+            <BFormGroup id="password-repeat-group" :label="$t('password.repeat')" label-for="repeat-password-input">
                 <BFormInput id="repeat-password-input" v-model="userData.passwordRepeat"
                     type="password" required :state="validateRepeatPassword"/>
-                <BFormInvalidFeedback :state="validateRepeatPassword">Password doesn't match</BFormInvalidFeedback>
+                <BFormInvalidFeedback :state="validateRepeatPassword">{{ $t('register.error.passwordRepeat') }}</BFormInvalidFeedback>
             </BFormGroup>
-            <p class="error" v-show="errDetected">{{ errMessage }}</p>
-            <p  class="info" v-show="showMessage">{{ message }}</p>
-            <BButton variant="primary" type="submit">Submit</BButton>
+            <p class="error" v-show="errDetected">{{ $t(errMessage) }}</p>
+            <p  class="info" v-show="showMessage">{{ $t(message) }}</p>
+            <BButton variant="primary" type="submit">{{ $t('submit') }}</BButton>
         </BForm>
     </div>
 </template>
@@ -47,23 +47,23 @@ const errorMessage = (error) => {
     if (error instanceof AuthApiError) {
         switch (error.status) {
             case 400:
-                return error.message
+                return 'register.error.400'
             case 422:
-                return error.message
+                return 'register.error.422'
             case 429:
-                return "Issue in sending an email. Please try again."
+                return 'register.error.429'
             case 500:
-                return "Server error, contact an administrator."
+                return 'register.error.500'
             default:
-                return "Unknown error, contact an administrator."
+                return 'register.error.unknown'
         }
     }
     else {
         if (error instanceof AuthSessionMissingError) {
-            return "Unable to create session, contact an administrator."
+            return 'register.error.session'
         }
         else {
-            return "Unknown error, contact an administrator."
+            return 'register.error.unknown'
         }
     }
 }
@@ -88,7 +88,7 @@ const submit = async () => {
     }
     else {
         showMessage.value = true
-        message.value = 'Check your email!'
+        message.value = 'register.emailCheck'
         return
     }
     setTimeout(() => router.push('/login'), 5000)

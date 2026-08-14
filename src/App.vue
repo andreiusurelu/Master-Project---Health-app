@@ -1,10 +1,37 @@
 <template>
   <div>
-    <nav v-if="!$route.meta.fullscreen">
-      <router-link to="/home">Home</router-link>
-      |
-      <router-link to="/about">About</router-link>
-    </nav>
+    <BNavbar v-if="$route.meta.topbar"
+    v-b-color-mode="'dark'"
+    variant="primary">
+      <BNavbarToggle target="nav-collapse"/>
+      <BCollapse id="nav-collapse" is-nav>
+        <BNavbarNav color="white">
+          <BNavItem to="/home">
+            {{ $t('home') }}
+          </BNavItem>
+          <BNavItem to="/about">
+            {{ $t('about.title') }}
+          </BNavItem>
+        </BNavbarNav>
+        <BNavbarNav class="ms-auto mb-2 mb-lg-0">
+          <BNavItemDropdown
+          right size="lg" no-caret>
+          <template #button-content><IBiPersonCircle size="lg"/></template>
+            <BDropdownGroup :header="$t('profile')">
+              <BDropdownItem @click="signOut()">{{ $t('signOut') }}</BDropdownItem>
+            </BDropdownGroup>
+            <BDropdownDivider />
+            <BDropdownGroup :header="$t('language.title')">
+              <BDropdownItem v-for="locale in $i18n.availableLocales"
+              :key="`locale-${locale}`"
+              :value="locale"
+              @click="$i18n.locale = locale">
+                {{ $t(`language.${locale}`) }}</BDropdownItem>
+            </BDropdownGroup>
+          </BNavItemDropdown>
+        </BNavbarNav>
+      </BCollapse>
+    </BNavbar>
 
     <router-view />
   </div>
@@ -13,26 +40,39 @@
 <script setup>
 import { onMounted } from 'vue'
 import CameraSDK from './components/camera_sdk.js'
+import { supabase } from './components/client_data.js'
+import router from './router/index.js'
+import {
+  BNavbar,
+  BNavbarNav,
+  BNavbarToggle,
+  BCollapse,
+  BDropdownGroup,
+  BNavItemDropdown,
+  BDropdownItem,
+  BNavItem,
+  BDropdownDivider
+} from 'bootstrap-vue-next'
 
 onMounted(async() =>{
   await CameraSDK.init()
 })
+
+const signOut = async () => {
+    const { error } = await supabase.auth.signOut()
+    if (error) {
+        console.log(error)
+        return
+    }
+    else {
+        router.push('/login')
+    }
+}
 </script>
 
 <style>
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-}
-
-nav {
-  padding: 16px;
-  background: #42b883;
-}
-
-nav a {
-  color: white;
-  margin-right: 10px;
-  text-decoration: none;
 }
 </style>

@@ -1,0 +1,135 @@
+{
+    "login" : {
+        "welcome": "Bine ai venit! Autentifică-te",
+        "noAccount": "Nu ai cont?",
+        "passwordForgot": "Ai uitat parola?",
+        "error": {
+            "400": "Eroare în cererea de autentificare, posibil cerere greșită.",
+            "422": "Eroare în procesarea cererii de autentificare.",
+            "429": "Problemă în trimiterea email-ului, încearcă din nou",
+            "500": "Eroare de server, contactează un administrator.",
+            "unknown": "Eroare necunoscută, contactează un administrator.",
+            "session": "Eroare în crearea unei sesiuni, contactează un administrator."
+        }
+    },
+    "register": {
+        "error": {
+            "password": "Parola trebuie să aibă între 8 și 24 de caractere și să aibă minim un număr și o literă.",
+            "passwordRepeat": "Parolele nu se potrivesc.",
+            "400": "Eroare în cererea de înregistrare, posibil cerere greșită.",
+            "422": "Eroare în procesarea cererii de înregistrare.",
+            "429": "Problemă în trimiterea email-ului, încearcă din nou",
+            "500": "Eroare de server, contactează un administrator.",
+            "unknown": "Eroare necunoscută, contactează un administrator.",
+            "session": "Eroare în crearea unei sesiuni, contactează un administrator."
+        },
+        "emailCheck": "Verifică-ți email-ul!"
+    },
+    "userForm": {
+        "age": {
+            "label": "Vârstă:",
+            "invalid": "Vâsta ta trebuie să fie între {min} și {max}.",
+            "description": "Vârsta ta actuală",
+            "placeholder": "ex. 20 de ani"
+        },
+        "sex": {
+            "label": "Sex:",
+            "description": "Sexul tău",
+            "male": "Masculin",
+            "female": "Feminin"
+        },
+        "level": {
+            "label": "Nivel:",
+            "description": "Nivelul tău de fitness",
+            "options": {
+                "beginner": "Începător",
+                "intermediary": "Intermediar",
+                "advanced": "Avansat",
+                "chooseOption": "Te rog alege o opțiune"
+            }
+        },
+        "weight": {
+            "label": "Greutate:",
+            "description": "Greutatea ta actuală (în kilograme)",
+            "placeholder": "ex. 80 kg",
+            "invalid": "Greutatea ta ar trebui să fie între {min} și {max} kilograme."
+        },
+        "height": {
+            "label": "Înălțime:",
+            "description": "Înălțimea ta (în centimetri)",
+            "placeholder": "ex. 175 cm",
+            "invalid": "Înălțimea ta ar trebui să fie între {min} și {max} centimetri."
+        }
+    },
+    "email": {
+        "label": "Adresă de email:",
+        "invalidFormat": "Format greșit al adresei de email",
+        "placeholder": "ex. ion_popa\\@mail.com"
+    },
+    "password": {
+        "label": "Parolă:",
+        "repeat": "Repetă parola:",
+        "reset": {
+            "emailCheck": "Verifică email-ul pentru link-ul de resetare.",
+            "error": {
+                "sendEmail": "A apărut o eroare în timpul trimiterii cererii de resetare.",
+                "format": "Parola trebuie să aibă între 8 și 24 de caractere și să aibă minim un număr și o literă.",
+                "repeat": "Parolele nu se potrivesc."
+            }
+        }
+    },
+    "fitnessCard": {
+        "modal": {
+            "title": "Instrucțiuni",
+            "select": "Selectează",
+            "cancel": "Anulează",
+            "body": "<p><b>Înainte de a continua, citește următoarele instrucțiuni:</b></p><p>Se presupune în această sesiune că ești deja încălzit. În caz contrar, apasă Anulează și revino după ce ești încălzit.</p><p>Trebuie să faci {noReps} de {title}.</p><p>Va trebui să apeși pe butonul de record și să te poziționezi în fața camerei <b>până când culoarea marginii ecranului devine verde</b>.</p><p>Vei începe să efectuezi programul de exerciții selectat și să faci până în {noReps} de repetări.</p><p>Când ai terminat, apasă pe butonul de înregistrare pentru a opri sesiunea și completează formularul de feedback.</p><p><b>Prin apăsarea butonului Ok, confirmi că ai citit instrucțiunile.</b></p>"
+        },
+        "itemSubtitle": "Număr de repetări: {noReps}"
+    },
+    "fitnessExercises": {
+        "abs": {
+            "title": "Abdomene",
+            "description": "Trebuie să faci abdomene pentru a determina nivelul de fitness al abdomenului. <b>Este recomandat să te poziționezi lateral de camera ta.</b>"
+        },
+        "pushups": {
+            "title": "Flotări",
+            "description": "Trebuie să faci flotări pentru a determina nivelul de fitness al pieptului tău. <b>Este recomandat să te poziționezi lateral de camera ta.</b>"
+        },
+        "squats": {
+            "title": "Genoflexiuni",
+            "description": "Trebuie să faci genoflexiuni pentru a determina nivelul de fitness al picioarelor tale. <b>Este recomandat să te poziționezi frontal de camera ta.</b>"
+        }
+    },
+    "feedback": {
+        "noReps": {
+            "label": "Număr de repetări:",
+            "description": "Câte repetări ai făcut?",
+            "invalid": "Ar fi trebuit să faci între 1 și {noReps} repetări.",
+            "placeholder": "ex. 20"
+        },
+        "rir": {
+            "label": "Număr extra de repetări:",
+            "description": "Câte repetări ai mai putea face?",
+            "invalid": "Ar trebui să mai poți face între 1 și {maxLimit} repetăro.",
+            "placeholder": "ex. încă 5"
+        }
+    },
+    "endSurvey": "<h3>Mulțumim!</h3>Dorim să îți mulțumim pentru completarea acestui sondaj! Rămâi la curent pentru viitoare actualizări!",
+    "submit": "Trimite",
+    "reset": "Resetare",
+    "process": "Se încarcă..",
+    "home": "Acasă",
+    "profile": "Profil",
+    "language": {
+        "title": "Limbă",
+        "en": "Engleză",
+        "ro": "Română",
+        "de": "Germană"
+    },
+    "signOut": "Deconectare",
+    "about": {
+        "title": "Despre",
+        "body": "<h3>Cine suntem noi?</h3>Suntem o echipă din cadrul Universității Politehnica din București și cercetăm aplicarea algoritmilor de Computer Vision în sport. <h3>Care este scopul studiului?</h3> Scopul cercetării noastre este de a determina oboseala fizică și de a o corela cu oboseala psihologică percepută. <h3>La ce să mă aștept?</h3> Ne așteptăm ca tu, utilizatorul, să respecți instrucțiunile oferite. Setul de exerciții poate fi făcut de oricine, indiferent de nivelul de fitness."
+    }
+}

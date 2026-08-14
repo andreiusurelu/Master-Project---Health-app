@@ -1,11 +1,18 @@
 <template>
     <div class="container">
-        <h3>Thank you!</h3>
-        We would like to thank you for your time and effort in taking this survey! Stay tuned for future updates!
-        
+        <p v-html="$t('endSurvey')"></p>
     </div>
 
 </template>
+
+<script setup>
+import { onMounted } from 'vue'
+import CameraSDK from '../components/camera_sdk.js'
+
+onMounted(async() => {
+    await CameraSDK.stopSDK()
+})
+</script>
 
 <style scoped>
 .container {

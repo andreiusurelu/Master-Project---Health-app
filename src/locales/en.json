@@ -1,0 +1,135 @@
+{
+    "login" : {
+        "welcome": "Welcome! Sign in",
+        "noAccount": "No account?",
+        "passwordForgot": "Forgot password?",
+        "error": {
+            "400": "Error in login request, possible bad request.",
+            "422": "Error in processing the login request.",
+            "429": "Issue in sending an email, please submit again.",
+            "500": "Server error, contact an administrator.",
+            "unknown": "Unknown error, contact an administrator.",
+            "session": "Unable to create session, contact an administrator."
+        }
+    },
+    "register": {
+        "error": {
+            "password": "Password must be between 8 and 24 characters and have at least one number and one letter.",
+            "passwordRepeat": "Password doesn't match.",
+            "400": "Error in register request, possible bad URL or body.",
+            "422": "Error in processing the register request.",
+            "429": "Issue in sending an email, please submit again.",
+            "500": "Server error, contact an administrator.",
+            "unknown": "Unknown error, contact an administrator.",
+            "session": "Unable to create session, contact an administrator."
+        },
+        "emailCheck": "Check your email!"
+    },
+    "userForm": {
+        "age": {
+            "label": "Age:",
+            "invalid": "Your age should be between {min} and {max}.",
+            "description": "Your current age",
+            "placeholder": "e.g 20 years old"
+        },
+        "sex": {
+            "label": "Sex:",
+            "description": "Your sex",
+            "male": "Male",
+            "female": "Female"
+        },
+        "level": {
+            "label": "Level:",
+            "description": "Your fitness level",
+            "options": {
+                "beginner": "Beginner",
+                "intermediary": "Intermediary",
+                "advanced": "Advanced",
+                "chooseOption": "Please select an option"
+            }
+        },
+        "weight": {
+            "label": "Weight:",
+            "description": "Your current weight (in kilograms)",
+            "placeholder": "e.g 80 kgs",
+            "invalid": "Your weight should be between {min} and {max} kilograms."
+        },
+        "height": {
+            "label": "Height:",
+            "description": "Your current height (in centimeters)",
+            "placeholder": "e.g 175 cm",
+            "invalid": "Your weight should be between {min} and {max} centimeters."
+        }
+    },
+    "email": {
+        "label": "Email address:",
+        "invalidFormat": "Invalid email address format",
+        "placeholder": "eg. joe_doe\\@mail.com"
+    },
+    "password": {
+        "label": "Password:",
+        "repeat": "Repeat password:",
+        "reset": {
+            "emailCheck": "Check your email for a reset link",
+            "error": {
+                "sendEmail": "There was an error when sending a password reset request.",
+                "format": "Password must be between 8 and 24 characters and have at least one number and one letter.",
+                "repeat": "Password doesn't match"
+            }
+        }
+    },
+    "fitnessCard": {
+        "modal": {
+            "title": "Instructions",
+            "select": "Select",
+            "cancel": "Cancel",
+            "body": "<p><b>Before proceeding, read the following instructions:</b></p><p>It is implied in this setup that you are warmed up. If not, press Cancel and proceed after being warmed up.</p><p>You have to do {noReps} repetitions of {title}.</p><p>You will have to click the record button and then position yourself in front of the camera <b>until the border color turns green</b>.</p><p>You will proceed to train according to the selected exercise and do up to {noReps} repetitions.</p><p>When you're done, click on the record button to stop the recording session and proceed to the feedback form.</p><p><b>By clicking Ok, you confirm that you've read the instructions.</b></p>"
+        },
+        "itemSubtitle": "Number of reps: {noReps}"
+    },
+    "fitnessExercises": {
+        "abs": {
+            "title": "Abs",
+            "description": "You must do some abs in order to determine your core fitness. <b>It is recommended to position yourself sideways of your camera.</b>"
+        },
+        "pushups": {
+            "title": "Pushups",
+            "description": "You must do some pushups in order to determine your chest fitness. <b>It is recommended to position yourself sideways of your camera.</b>"
+        },
+        "squats": {
+            "title": "Squats",
+            "description": "You must do some squats in order to determine your legs fitness. <b>It is recommended to position yourself in front of your camera.</b>"
+        }
+    },
+    "feedback": {
+        "noReps": {
+            "label": "Number of reps:",
+            "description": "How many repetitions have you completed?",
+            "invalid": "You should have completed between 1 and {noReps} repetitions.",
+            "placeholder": "eg. 20"
+        },
+        "rir": {
+            "label": "Extra number of reps:",
+            "description": "How many extra repetitions can you still do?",
+            "invalid": "You should be able to do 1 to {maxLimit} more repetitions.",
+            "placeholder": "eg. 5 more"
+        }
+    },
+    "endSurvey": "<h3>Thank you!</h3>We would like to thank you for your time and effort in taking this survey! Stay tuned for future updates!",
+    "submit": "Submit",
+    "reset": "Reset",
+    "process": "Processing...",
+    "home":  "Home",
+    "profile": "Profile",
+    "language": {
+        "title": "Language",
+        "en": "English",
+        "ro": "Romanian",
+        "de": "German"
+    },
+    "signOut": "Sign out",
+    "about": {
+        "title": "About",
+        "body": "<h3>Who are we?</h3> We are a team from Politehnica University of Bucharest and are researching Computer Vision applied in sports and fitness. <h3>What are we researching?</h3> Our research scope is to determine motion fatigue and correlate it with perceived psychological fatigue. <h3>What to expect?</h3> We expect that you, the user, respect the provided instructions. The fitness set can be done by every individual, regardess of fitness level."
+    }
+}

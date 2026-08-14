@@ -1,30 +1,22 @@
 <template>
     <div class="container">
-        <BModal v-model="modal" title="Instructions" @ok="confirm" @cancel="cancel">
-            <p><b>Before proceeding, read the following instructions:</b></p>
-            <p>It is implied in this setup that you are warmed up. If not, press Cancel and proceed after being warmed up.</p>
-            <p>You have to do {{ selectedExercise?.noReps }} repetitions of {{ selectedExercise?.title }}.</p>
-            <p>You will have to click the record button and then position yourself in front of the camera <b>until the border color turns green</b>.</p>
-            <p>You will proceed to train according to the selected exercise and do up to {{ selectedExercise?.noReps }} repetitions.</p>
-            <p>When you're done, click on the record button to stop the recording session and proceed to the feedback form.</p>
-            <p><b>By clicking Ok, you confirm that you've read the instructions.</b></p>
+        <BModal v-model="modal" :title="$t('fitnessCard.modal.title')" @ok="confirm" @cancel="cancel" :cancel-title="$t('fitnessCard.modal.cancel')">
+            <p v-if="selectedExercise" v-html="$t('fitnessCard.modal.body', {title: $t(selectedExercise.title), noReps: selectedExercise.noReps})"></p>
         </BModal>
         <BCard
             v-for="item in store.exerciseList"
-            :title="item.title"
+            :title="$t(item.title)"
             :key="item.id"
-            :subtitle="'Number of reps: ' + item.noReps"
+            :subtitle="$t('fitnessCard.itemSubtitle', {noReps: item.noReps})"
             variant="tonal">
 
             <BRow class="g-0">
                 <BCol md="6">
                     <BCardBody>
-                        <BCardText>
-                            {{ item.description }}
-                        </BCardText>
+                        <BCardText v-html="$t(item.description)"/>
                         <BButton variant="outline-primary" v-on:click="onSelect(item)"
                         v-bind:disabled="item.selected">
-                            Select
+                            {{ $t('fitnessCard.modal.select') }}
                         </BButton>
                     </BCardBody>
                 </BCol>

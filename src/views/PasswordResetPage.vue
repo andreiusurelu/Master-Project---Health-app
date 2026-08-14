@@ -3,23 +3,23 @@
         <h2>Password Reset Form</h2>
         <div v-if="recoveryMode">
             <BForm @submit.prevent="submit">
-                <BFormGroup id="password-group" label="Password:" label-for="password-input">
+                <BFormGroup id="password-group" :label="$t('password.text')" label-for="password-input">
                     <BFormInput id="password-input" v-model="resetData.password" type="password" required
                         :state="validatePassword"/>
-                    <BFormInvalidFeedback :state="validatePassword">Password must be between 8 and 24 characters and have at least one number and one letter.</BFormInvalidFeedback>
+                    <BFormInvalidFeedback :state="validatePassword">{{ $t('password.reset.error.format') }}</BFormInvalidFeedback>
                 </BFormGroup>
-                <BFormGroup id="password-repeat-group" label="Repeat password:" label-for="repeat-password-input">
+                <BFormGroup id="password-repeat-group" :label="$t('password.repeat')" label-for="repeat-password-input">
                     <BFormInput id="repeat-password-input" v-model="resetData.passwordRepeat"
                         type="password" required :state="validateRepeatPassword"/>
-                    <BFormInvalidFeedback :state="validateRepeatPassword">Password doesn't match</BFormInvalidFeedback>
+                    <BFormInvalidFeedback :state="validateRepeatPassword">{{ $t('password.reset.error.repeat') }}</BFormInvalidFeedback>
                 </BFormGroup>
 
-                <BButton variant="primary" type="submit">Submit</BButton>
+                <BButton variant="primary" type="submit">{{ $t('submit') }}</BButton>
             </BForm>
         </div>
         <div v-else>
             <div v-show="messageSent">
-                {{ message }}
+                {{ $t(message) }}
             </div>
         </div>
     </div>
@@ -67,7 +67,7 @@ const submit = async () => {
         password: resetData.password
     })
     console.log('update result:', data, error)
-    message.value = 'Processing...'
+    message.value = 'process'
     messageSent.value = true
 }
 

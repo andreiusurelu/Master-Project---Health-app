@@ -148,7 +148,7 @@ const renderLoop = async (now, metadata) => {
       }
     }
     else {
-      console.log('INVALID HEIGHT AND WIDTH')
+      console.error('INVALID HEIGHT AND WIDTH')
     }
     frameCallbackHandle = video.requestVideoFrameCallback(renderLoop)
   }

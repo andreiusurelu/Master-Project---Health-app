@@ -2,27 +2,27 @@
     <div class="container">
         <h2>Welcome! Sign in</h2>
         <BForm @submit.prevent="submit">
-            <BFormGroup id="email-group" label="Email address:" label-for="email-input">
+            <BFormGroup id="email-group" :label="$t('email.label')" label-for="email-input">
                 <BFormInput id="email-input" v-model="userData.emailAddress" type="email"
-                placeholder="eg. joe_doe@mail.com" required :state="validateEmail"/>
-                <BFormInvalidFeedback :state="validateEmail">Invalid email address format</BFormInvalidFeedback>
+                :placeholder="$t('email.placeholder')" required :state="validateEmail"/>
+                <BFormInvalidFeedback :state="validateEmail">{{ $t('email.invalidFormat') }}</BFormInvalidFeedback>
             </BFormGroup>
-            <BFormGroup id="password-group" label="Password:" label-for="password-input">
+            <BFormGroup id="password-group" :label="$t('password.label')" label-for="password-input">
                 <BFormInput id="password-input" v-model="userData.password" type="password" required/>
             </BFormGroup>
-            <p class="error" v-if="errDetected">{{ errMessage }}</p>
+            <p class="error" v-if="errDetected">{{ $t(errMessage) }}</p>
 
             <BFormGroup>
                 <BRow class="justify-content-between">
                     <BCol cols="auto">
-                        <BLink to="/register" exact-path>No account?</BLink>
+                        <BLink to="/register" exact-path>{{ $t('login.noAccount') }}</BLink>
                     </BCol>
                     <BCol cols="auto">
-                        <BLink to="/forgetPassword" exact-path>Forgot password?</BLink>
+                        <BLink to="/forgetPassword" exact-path>{{ $t('login.passwordForgot') }}</BLink>
                     </BCol>
                 </BRow>
             </BFormGroup>
-            <BButton variant="primary" type="submit">Submit</BButton>
+            <BButton variant="primary" type="submit">{{ $t('submit') }}</BButton>
         </BForm>
     </div>
 </template>
@@ -50,23 +50,23 @@ const errorMessage = (error) => {
     if (error instanceof AuthApiError) {
         switch (error.status) {
             case 400:
-                return error.message
+                return 'login.error.400'
             case 422:
-                return error.message
+                return 'login.error.422'
             case 429:
-                return "Issue in sending an email. Please try again."
+                return 'login.error.429'
             case 500:
-                return "Server error, contact an administrator."
+                return 'login.error.500'
             default:
-                return "Unknown error, contact an administrator."
+                return 'login.error.unknown'
         }
     }
     else {
         if (error instanceof AuthSessionMissingError) {
-            return "Unable to create session, contact an administrator."
+            return 'login.error.session'
         }
         else {
-            return "Unknown error, contact an administrator."
+            return 'login.error.unknown'
         }
     }
 }

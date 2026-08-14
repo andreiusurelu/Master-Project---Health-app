@@ -2,13 +2,13 @@
     <div class="container">
         <h2>Password Recovery Form</h2>
         <BForm @submit.prevent="submit">
-            <BFormGroup id="email-group" label="Email address:" label-for="email-input">
-                <BFormInput id="email-input" v-model="emailAddress" type="email" placeholder="eg. joe_doe@mail.com" required "/>
+            <BFormGroup id="email-group" :label="$t('email.label')" label-for="email-input">
+                <BFormInput id="email-input" v-model="emailAddress" type="email" :placeholder="$t('email.placeholder')" required "/>
             </BFormGroup>
 
-            <BButton variant="primary" type="submit">Submit</BButton>
+            <BButton variant="primary" type="submit">{{ $t('submit') }}</BButton>
             <div v-show="messageSent">
-                {{ message }}
+                {{ $t(message) }}
             </div>
         </BForm>
     </div>
@@ -32,11 +32,11 @@ const submit = async () => {
         }
     )
     if (error) {
-        message.value = error.message
+        message.value = 'password.reset.error.sendEmail'
         console.log(error)
     }
     else {
-        message.value = 'Check your email for a reset link'
+        message.value = 'password.reset.emailCheck'
     }
     messageSent.value = true
 }
