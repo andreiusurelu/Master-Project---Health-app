@@ -9,7 +9,7 @@ class BlazePoseWorker extends BaseWorker {
   async initializeTask() {
     console.log('initializeTask before vision init!')
     const vision = await FilesetResolver.forVisionTasks(
-                "/wasm"
+                "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision/wasm"
             );
     const response = await fetch(vision.wasmLoaderPath);
     eval?.(await response.text());
