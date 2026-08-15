@@ -8,7 +8,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
 
 import router from './router'
-import './registerServiceWorker'
 
 import ro from './locales/ro.json'
 import en from './locales/en.json'
