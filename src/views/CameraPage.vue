@@ -43,6 +43,7 @@
 import { onBeforeMount, onMounted, onUnmounted, ref, computed } from 'vue'
 import CameraSDK from '../components/camera_sdk.js'
 import { BButton } from 'bootstrap-vue-next'
+import { useI18n } from 'vue-i18n'
 import router from '../router'
 
 import { useFitnessStore } from '../components/states/fitness_data.js'
@@ -51,6 +52,7 @@ import { useFitnessStore } from '../components/states/fitness_data.js'
 const videoRef = ref(null)
 
 const store = useFitnessStore()
+const {t} = useI18n()
 
 let stream = null
 let frameCallbackHandle = null
@@ -104,8 +106,16 @@ const startCamera = async () => {
     await renderLoop();
 
   } catch (err) {
-    alert('Error when starting camera. Check logs.')
-    console.log(err)
+    if (err.name == "NotAllowedError") {
+      alert(t('alert.camera.denied'))
+    }
+    else if (err.name == "NotFoundError"){
+      alert(t('alert.camera.notFound'))
+    }
+    else {
+      alert(t('alert.camera.error'))
+    }
+    console.error(err)
   }
 }
 

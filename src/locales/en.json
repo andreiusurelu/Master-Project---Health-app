@@ -13,6 +13,7 @@
         }
     },
     "register": {
+        "title": "Register",
         "error": {
             "password": "Password must be between 8 and 24 characters and have at least one number and one letter.",
             "passwordRepeat": "Password doesn't match.",
@@ -26,6 +27,7 @@
         "emailCheck": "Check your email!"
     },
     "userForm": {
+        "title": "User Information",
         "age": {
             "label": "Age:",
             "invalid": "Your age should be between {min} and {max}.",
@@ -70,12 +72,16 @@
         "label": "Password:",
         "repeat": "Repeat password:",
         "reset": {
+            "formTitle": "Password Reset Form",
             "emailCheck": "Check your email for a reset link",
             "error": {
                 "sendEmail": "There was an error when sending a password reset request.",
                 "format": "Password must be between 8 and 24 characters and have at least one number and one letter.",
                 "repeat": "Password doesn't match"
             }
+        },
+        "recovery": {
+            "title": "Password Recovery Form"
         }
     },
     "fitnessCard": {
@@ -102,6 +108,7 @@
         }
     },
     "feedback": {
+        "title": "Feedback Form",
         "noReps": {
             "label": "Number of reps:",
             "description": "How many repetitions have you completed?",
@@ -131,5 +138,16 @@
     "about": {
         "title": "About",
         "body": "<h3>Who are we?</h3> We are a team from Politehnica University of Bucharest and are researching Computer Vision applied in sports and fitness. <h3>What are we researching?</h3> Our research scope is to determine motion fatigue and correlate it with perceived psychological fatigue. <h3>What to expect?</h3> We expect that you, the user, respect the provided instructions. The fitness set can be done by every individual, regardess of fitness level."
+    },
+    "alert": {
+        "form": {
+            "saved": "Form was saved!",
+            "error": "Error on form!"
+        },
+        "camera": {
+            "error": "Error when starting camera!",
+            "denied": "Camera access denied, please enable permissions in your browser and refresh the page!",
+            "notFound": "We couldn't find a camera, please connect a camera to a device to proceed!"
+        }
     }
 }

@@ -13,6 +13,7 @@
         }
     },
     "register": {
+        "title": "Înregistrare",
         "error": {
             "password": "Parola trebuie să aibă între 8 și 24 de caractere și să aibă minim un număr și o literă.",
             "passwordRepeat": "Parolele nu se potrivesc.",
@@ -26,6 +27,7 @@
         "emailCheck": "Verifică-ți email-ul!"
     },
     "userForm": {
+        "title": "Informații utilizator",
         "age": {
             "label": "Vârstă:",
             "invalid": "Vâsta ta trebuie să fie între {min} și {max}.",
@@ -70,12 +72,16 @@
         "label": "Parolă:",
         "repeat": "Repetă parola:",
         "reset": {
+            "formTitle": "Formular Resetare Parolă",
             "emailCheck": "Verifică email-ul pentru link-ul de resetare.",
             "error": {
                 "sendEmail": "A apărut o eroare în timpul trimiterii cererii de resetare.",
                 "format": "Parola trebuie să aibă între 8 și 24 de caractere și să aibă minim un număr și o literă.",
                 "repeat": "Parolele nu se potrivesc."
             }
+        },
+        "recovery": {
+            "title": "Formular Recuperare Parolă"
         }
     },
     "fitnessCard": {
@@ -102,6 +108,7 @@
         }
     },
     "feedback": {
+        "title": "Formular Feedback",
         "noReps": {
             "label": "Număr de repetări:",
             "description": "Câte repetări ai făcut?",
@@ -131,5 +138,16 @@
     "about": {
         "title": "Despre",
         "body": "<h3>Cine suntem noi?</h3>Suntem o echipă din cadrul Universității Politehnica din București și cercetăm aplicarea algoritmilor de Computer Vision în sport. <h3>Care este scopul studiului?</h3> Scopul cercetării noastre este de a determina oboseala fizică și de a o corela cu oboseala psihologică percepută. <h3>La ce să mă aștept?</h3> Ne așteptăm ca tu, utilizatorul, să respecți instrucțiunile oferite. Setul de exerciții poate fi făcut de oricine, indiferent de nivelul de fitness."
+    },
+    "alert": {
+        "form": {
+            "saved": "Formularul a fost salvat!",
+            "error": "Eroare în formular!"
+        },
+        "camera": {
+            "error": "Eroare la pornirea camerei video!",
+            "denied": "Accesul camerei video a fost refuzat, te rog permite accesul camerei în browser-ul tău și reîmprospătează pagina!",
+            "notFound": "Nu am putut găsi o cameră video, te rog conectează o cameră cu dispozitivul tău pentru a continua!"
+        }
     }
 }

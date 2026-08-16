@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h2>Password Reset Form</h2>
+        <h2>{{ $t('password.reset.formTitle') }}</h2>
         <div v-if="recoveryMode">
             <BForm @submit.prevent="submit">
                 <BFormGroup id="password-group" :label="$t('password.text')" label-for="password-input">

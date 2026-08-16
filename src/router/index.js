@@ -62,7 +62,19 @@ const routes = [
     path: '/feedback',
     name: 'feedback',
     component: FeedbackPage,
-    meta: { requiresAuth: true, topbar: true }
+    meta: { requiresAuth: true, topbar: true },
+    beforeEnter: () => {
+      const store = useFitnessStore();
+      if (store.selectedExercise == null) {
+        return '/cards'
+      }
+      else if (store.fitnessSessionData == null) {
+        return '/camera'
+      }
+      else {
+        return true
+      }
+    }
   },
   {
     path: '/cards',

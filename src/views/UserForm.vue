@@ -95,11 +95,11 @@ const submitForm = async () => {
     onConflict: 'userId'
   })
   if (response.success) {
-    alert('Form was saved!')
+    alert(t('alert.form.saved'))
     router.push('/cards')
   }
   else {
-    alert('Error on form!')
+    alert(t('alert.form.error'))
     console.log(response)
   }
 }

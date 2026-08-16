@@ -13,6 +13,7 @@
         }
     },
     "register": {
+        "title": "Anmeldung",
         "error": {
             "password": "Das Passwort muss zwischen 8 und 24 Zeichen lang sein und mindestens eine Zahl und einen Buchstaben enthalten.",
             "passwordRepeat": "Die Passwörter stimmen nicht überein.",
@@ -26,6 +27,7 @@
         "emailCheck": "Überprüfe deine E-Mail!"
     },
     "userForm": {
+        "title": "Benutzerinformationen",
         "age": {
         "label": "Alter:",
         "invalid": "Dein Alter muss zwischen {min} und {max} liegen.",
@@ -70,12 +72,16 @@
         "label": "Passwort:",
         "repeat": "Passwort wiederholen:",
         "reset": {
-        "emailCheck": "Überprüfe deine E-Mail auf den Link zum Zurücksetzen des Passworts.",
-        "error": {
-            "sendEmail": "Beim Senden der Anfrage zum Zurücksetzen des Passworts ist ein Fehler aufgetreten.",
-            "format": "Das Passwort muss zwischen 8 und 24 Zeichen lang sein und mindestens eine Zahl und einen Buchstaben enthalten.",
-            "repeat": "Die Passwörter stimmen nicht überein."
-        }
+            "formTitle": "Passwort-Zurücksetzungsformular",
+            "emailCheck": "Überprüfe deine E-Mail auf den Link zum Zurücksetzen des Passworts.",
+            "error": {
+                "sendEmail": "Beim Senden der Anfrage zum Zurücksetzen des Passworts ist ein Fehler aufgetreten.",
+                "format": "Das Passwort muss zwischen 8 und 24 Zeichen lang sein und mindestens eine Zahl und einen Buchstaben enthalten.",
+                "repeat": "Die Passwörter stimmen nicht überein."
+            }
+        },
+        "recovery": {
+            "title": "Passwort-Wiederherstellungsformular"
         }
     },
     "fitnessCard": {
@@ -102,17 +108,18 @@
         }
     },
     "feedback": {
+        "title": "Feedback-Formular",
         "noReps": {
-        "label": "Anzahl der Wiederholungen:",
-        "description": "Wie viele Wiederholungen hast du gemacht?",
-        "invalid": "Du hättest zwischen 1 und {noReps} Wiederholungen machen sollen.",
-        "placeholder": "z. B. 20"
+            "label": "Anzahl der Wiederholungen:",
+            "description": "Wie viele Wiederholungen hast du gemacht?",
+            "invalid": "Du hättest zwischen 1 und {noReps} Wiederholungen machen sollen.",
+            "placeholder": "z. B. 20"
         },
         "rir": {
-        "label": "Anzahl zusätzlicher Wiederholungen:",
-        "description": "Wie viele weitere Wiederholungen hättest du noch machen können?",
-        "invalid": "Du solltest noch zwischen 1 und {maxLimit} Wiederholungen schaffen können.",
-        "placeholder": "z. B. noch 5"
+            "label": "Anzahl zusätzlicher Wiederholungen:",
+            "description": "Wie viele weitere Wiederholungen hättest du noch machen können?",
+            "invalid": "Du solltest noch zwischen 1 und {maxLimit} Wiederholungen schaffen können.",
+            "placeholder": "z. B. noch 5"
         }
     },
     "endSurvey": "<h3>Vielen Dank!</h3>Wir möchten uns bei dir für das Ausfüllen dieser Umfrage bedanken! Bleibe auf dem Laufenden über zukünftige Updates!",
@@ -131,6 +138,16 @@
     "about": {
         "title": "Über uns",
         "body": "<h3>Wer sind wir?</h3>Wir sind ein Team der Politehnica Universität Bukarest und erforschen die Anwendung von Computer-Vision-Algorithmen im Sport. <h3>Was ist das Ziel der Studie?</h3>Das Ziel unserer Forschung ist es, körperliche Ermüdung zu bestimmen und sie mit der wahrgenommenen psychologischen Ermüdung zu korrelieren. <h3>Was kann ich erwarten?</h3>Wir erwarten, dass du als Nutzer die bereitgestellten Anweisungen befolgst. Das Übungsprogramm kann von jedem durchgeführt werden, unabhängig vom Fitnessniveau."
+    },
+    "alert": {
+        "form": {
+            "saved": "Formular war abgespeichert!",
+            "error": "Fehler in Formular!"
+        },
+        "camera": {
+            "error": "Fehler beim Starten der Videokamera!",
+            "denied": "Der Zugriff auf die Videokamera wurde verweigert. Bitte erlaube den Kamerazugriff in deinem Browser und aktualisiere die Seite!",
+            "notFound": "Es konnte keine Videokamera gefunden werden. Bitte verbinde eine Kamera mit deinem Gerät, um fortzufahren!"
+        }
     }
-    
 }

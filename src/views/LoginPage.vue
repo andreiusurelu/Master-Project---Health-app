@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h2>Welcome! Sign in</h2>
+        <h2>{{ $t('login.welcome') }}</h2>
         <BForm @submit.prevent="submit">
             <BFormGroup id="email-group" :label="$t('email.label')" label-for="email-input">
                 <BFormInput id="email-input" v-model="userData.emailAddress" type="email"

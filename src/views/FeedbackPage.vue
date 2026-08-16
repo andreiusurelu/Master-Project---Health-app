@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2>Feedback Form</h2>
+    <h2>{{ $t('feedback.title') }}</h2>
 
     <BForm @submit.prevent="submitFeedback">
       <BFormGroup id="no-reps-group" :label="$t('feedback.noReps.label')" label-for="no-reps-input"
@@ -31,6 +31,9 @@ import { supabase } from '../components/client_data'
 import router from '../router'
 import CameraSDK from '../components/camera_sdk'
 import { useFitnessStore } from '../components/states/fitness_data'
+import { useI18n } from 'vue-i18n'
+
+const {t} = useI18n()
 
 const feedback = reactive({
   done_reps: '',
@@ -69,11 +72,11 @@ const submitFeedback = async () => {
   })
 
   if (response.success) {
-    alert('Form was saved!')
+    alert(t('alert.form.saved'))
     router.push('/cards')
   }
   else {
-    alert('Error on form!')
+    alert(t('alert.form.error'))
     console.log(response)
     return
   }
