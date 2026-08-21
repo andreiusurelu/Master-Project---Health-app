@@ -15,16 +15,34 @@ class BlazePoseWorker extends BaseWorker {
     eval?.(await response.text());
     delete vision.wasmLoaderPath;
     console.log('initializeTask before taskInstance init!');
-    this.taskInstance = await PoseLandmarker.createFromOptions(
+    try {
+      this.taskInstance = await PoseLandmarker.createFromOptions(
                 vision,
                 {
                 baseOptions: {
-                    modelAssetPath: '/models/pose_landmarker_full.task'
+                    modelAssetPath: '/models/pose_landmarker_full.task',
+                    delegate: "GPU"
                 },
                 runningMode: 'VIDEO',
                 numPoses: 1
                 }
             );
+    }
+    catch (error) {
+      console.warn('Could not delegate to GPU on device');
+      this.taskInstance = await PoseLandmarker.createFromOptions(
+                vision,
+                {
+                baseOptions: {
+                    modelAssetPath: '/models/pose_landmarker_full.task',
+                    delegate: "CPU"
+                },
+                runningMode: 'VIDEO',
+                numPoses: 1
+                }
+            );
+    }
+    
     console.log('initializeTask after taskInstance init!')
   }
 

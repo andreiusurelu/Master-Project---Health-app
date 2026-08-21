@@ -1,7 +1,6 @@
 <template>
   <div>
     <BNavbar v-if="$route.meta.topbar"
-    v-b-color-mode="'dark'"
     variant="primary">
       <BNavbarToggle target="nav-collapse"/>
       <BCollapse id="nav-collapse" is-nav>
@@ -65,6 +64,7 @@ const signOut = async () => {
         return
     }
     else {
+        await CameraSDK.stopSDK()
         router.push('/login')
     }
 }

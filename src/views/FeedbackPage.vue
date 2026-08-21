@@ -19,7 +19,7 @@
         {{ $t('feedback.rir.invalid'), {maxLimit: maxExtraReps} }}
       </BFormInvalidFeedback>
     </BFormGroup>
-      <BButton type="submit">{{ $t('submit') }}</BButton>
+      <BButton type="submit" variant="primary">{{ $t('submit') }}</BButton>
     </BForm>
   </div>
 </template>
@@ -29,7 +29,6 @@ import { reactive, computed, ref, onBeforeMount } from 'vue'
 import { BButton, BForm, BFormInput, BFormGroup, BFormInvalidFeedback } from 'bootstrap-vue-next'
 import { supabase } from '../components/client_data'
 import router from '../router'
-import CameraSDK from '../components/camera_sdk'
 import { useFitnessStore } from '../components/states/fitness_data'
 import { useI18n } from 'vue-i18n'
 

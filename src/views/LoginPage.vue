@@ -84,7 +84,7 @@ const submit = async () => {
         console.log(error)
         return
     }
-    router.push('/userForm')
+    router.push('/cards')
 }
 
 onMounted(() => {

@@ -91,7 +91,6 @@ const submit = async () => {
         message.value = 'register.emailCheck'
         return
     }
-    setTimeout(() => router.push('/login'), 5000)
 }
 
 </script>

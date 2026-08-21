@@ -14,7 +14,8 @@ import en from './locales/en.json'
 import de from './locales/de.json'
 
 createApp(App)
-  .use(router, createBootstrap())
+  .use(router)
+  .use(createBootstrap())
   .use(createPinia())
   .use(createI18n({
     locale: navigator.language,

@@ -18,11 +18,11 @@ import { useFitnessStore } from '../components/states/fitness_data.js'
 const routes = [
   {
     path: '/',
-    redirect: { name: 'login' }
+    redirect: { name: 'home' }
   },
   {
     path: '/home',
-    redirect: {name: 'login'}
+    name: 'home'
   },
   {
     path: '/login',
@@ -34,7 +34,7 @@ const routes = [
     name: 'userForm',
     component: UserForm,
     meta: { requiresAuth: true, topbar: true },
-    beforeEnter: async(to, from) => {
+    beforeEnter: async () => {
       const { data, error, status } = await supabase.from('UserData').select("*");
       if (error) {
         if (status == 406) {
@@ -44,12 +44,18 @@ const routes = [
           console.error('Error in getting UserData: ', error);
         }
         throw new Error('UserForm');
-        return false;
       }
-      if (data !== null && data.length > 0 && status == 200) {
-        return '/cards';
+      if (status == 200) {
+        if (data !== null && data.length > 0) {
+          return '/cards'
+        }
+        else {
+          return true
+        }
       }
-      return true
+      else {
+        return false
+      }
     }
   },
   {
@@ -91,14 +97,12 @@ const routes = [
               console.error('Error in FitnessCardPage: ', error);
           }
           throw new Error('FitnessCardPage');
-          return false;
       }
       if (data && status == 200) {
             if (data.length > 0) {
               const store = useFitnessStore();
               store.updateExerciseList(data);
               if (store.allSelected) {
-                store.$reset();
                 return '/endSurvey'
               }
             }
@@ -125,7 +129,7 @@ const routes = [
     path: '/about',
     name: 'about',
     component: AboutPage,
-    meta: { topbar: true }
+    meta: { topbar: true,  requiresAuth: true }
   },
   {
     path: '/endSurvey',
@@ -137,7 +141,10 @@ const routes = [
       if (!store.allSelected) {
         return '/cards';
       }
-      return true;
+      else {
+        store.$reset();
+        return true;
+      }
     }
   }
 ]
@@ -158,13 +165,13 @@ router.beforeEach(async (to) => {
 
   const user = session?.user
 
-  if (to.meta.requiresAuth && !user) {
+  if ((to.meta.requiresAuth || to.name == 'home') && !user) {
     return {
       path: '/login',
       redirect: to.fullPath
     }
   }
-  else if (to.name == 'login' && user) {
+  else if (user && (to.name == 'home' || !to.meta.requiresAuth)) {
     return {
       path: '/cards',
       redirect: to.fullPath
@@ -175,7 +182,7 @@ router.beforeEach(async (to) => {
 
 router.beforeResolve(async (to) => {
   try {
-    if (to.name == 'userForm') {
+    if (to.name == 'cards') {
       const { data, error, status } = await supabase.from('UserData').select("*");
       if (error) {
         if (status == 406) {
@@ -186,18 +193,24 @@ router.beforeResolve(async (to) => {
         }
         throw new Error('UserForm');
       }
-      if (data !== null && data.length > 0 && status == 200) {
-        return '/cards';
+      if (status == 200) {
+        if (data !== null && data.length > 0) {
+          return true
+        }
+        else {
+          return '/userForm'
+        }
+      }
+      else {
+        return false
       }
     }
-
-    return true
   }
   catch (error) {
     console.error('Error detected: ',error);
     return false;
   }
-  
+  return true
 })
 
 export default router

@@ -3,11 +3,11 @@
     <h2>User Information</h2>
 
     <BForm @submit.prevent="submitForm" @reset="resetForm" v-if="show">
-      <BFormGroup id="age-group" :label="$t('userForm.age.label')" label-for="age-input" :description="$t('userForm.age.description', {min: constants.minAge, max: constants.maxAge})">
+      <BFormGroup id="age-group" :label="$t('userForm.age.label')" label-for="age-input" :description="$t('userForm.age.description')">
         <BFormInput id="age-input" v-model="form.age" type="number" :placeholder="$t('userForm.age.placeholder')" required
         :state="validateAge"/>
         <BFormInvalidFeedback :state="validateAge">
-          {{ $t('userForm.age.invalid') }}
+          {{ $t('userForm.age.invalid', {min: constants.minAge, max: constants.maxAge}) }}
         </BFormInvalidFeedback>
       </BFormGroup>
       <BFormGroup id="sex-group" :label="$t('userForm.sex.label')" label-for="sex-input" :description="$t('userForm.sex.description')">
@@ -34,7 +34,7 @@
         <BFormInput id="height-input" v-model="form.height" type="number" :placeholder="$t('userForm.height.placeholder')" required
         :state="validateHeight"/>
         <BFormInvalidFeedback :state="validateHeight">
-          {{ $t('userForm.height.invalid', {min: minHeight, max: maxHeight}) }}
+          {{ $t('userForm.height.invalid', {min: constants.minHeight, max: constants.maxHeight}) }}
         </BFormInvalidFeedback>
       </BFormGroup>
       <div class="buttons">
