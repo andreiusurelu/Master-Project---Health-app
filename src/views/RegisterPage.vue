@@ -27,9 +27,11 @@
 <script setup>
 import { ref, computed, reactive } from 'vue'
 import { BButton, BForm, BFormInput, BFormGroup, BFormInvalidFeedback } from 'bootstrap-vue-next'
-import router from '../router'
+import { useRouter } from 'vue-router'
 import { supabase } from '../components/client_data.js'
 import { constants } from '../components/constants/constants.js'
+
+const router = useRouter()
 
 const userData = reactive({
     emailAddress: '',

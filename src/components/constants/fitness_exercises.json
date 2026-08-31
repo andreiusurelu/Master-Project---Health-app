@@ -3,7 +3,10 @@
         "id": 1,
         "name": "abs",
         "title": "fitnessExercises.abs.title",
-        "description": "fitnessExercises.abs.description",
+        "description": {
+            "firstInstruction": "fitnessExercises.abs.description.firstInstruction",
+            "secondInstruction": "fitnessExercises.abs.description.secondInstruction"
+        },
         "noReps": 30,
         "img_link": "/img/cards/abs_image.jpg"
     },
@@ -11,7 +14,10 @@
         "id": 2,
         "name": "pushups",
         "title": "fitnessExercises.pushups.title",
-        "description": "fitnessExercises.pushups.description",
+        "description": {
+            "firstInstruction": "fitnessExercises.pushups.description.firstInstruction",
+            "secondInstruction": "fitnessExercises.pushups.description.secondInstruction"
+        },
         "noReps": 30,
         "img_link": "/img/cards/pushups_image.jpg"
     },
@@ -19,7 +25,10 @@
         "id": 3,
         "name": "squats",
         "title": "fitnessExercises.squats.title",
-        "description": "fitnessExercises.squats.description",
+        "description": {
+            "firstInstruction": "fitnessExercises.squats.description.firstInstruction",
+            "secondInstruction": "fitnessExercises.squats.description.secondInstruction"
+        },
         "noReps": 30,
         "img_link": "/img/cards/squats_image.jpg"
     }

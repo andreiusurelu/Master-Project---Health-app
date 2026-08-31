@@ -30,11 +30,12 @@
 <script setup>
 import { ref, computed, reactive, onMounted } from 'vue'
 import { BButton, BForm, BFormInput, BFormGroup, BFormInvalidFeedback, BLink, BRow, BCol } from 'bootstrap-vue-next'
-import router from '../router'
+import { useRouter } from 'vue-router'
 import { supabase } from '../components/client_data.js'
 import {constants} from '../components/constants/constants.js'
 import { AuthAdminApi, AuthApiError, AuthSessionMissingError } from '@supabase/supabase-js'
 
+const router = useRouter()
 const errDetected = ref(false)
 const errMessage = ref('')
 

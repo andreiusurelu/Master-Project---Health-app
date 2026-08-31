@@ -15,11 +15,12 @@
         <BNavbarNav class="ms-auto mb-2 mb-lg-0">
           <BNavItemDropdown
           right size="lg" no-caret>
-          <template #button-content><IBiPersonCircle size="lg"/></template>
+          <template #button-content><IBiTranslate size="lg"/></template>
+          <!-- <template #button-content><IBiPersonCircle size="lg"/></template>
             <BDropdownGroup :header="$t('profile')">
               <BDropdownItem @click="signOut()">{{ $t('signOut') }}</BDropdownItem>
             </BDropdownGroup>
-            <BDropdownDivider />
+            <BDropdownDivider /> -->
             <BDropdownGroup :header="$t('language.title')">
               <BDropdownItem v-for="locale in $i18n.availableLocales"
               :key="`locale-${locale}`"
@@ -39,8 +40,9 @@
 <script setup>
 import { onMounted } from 'vue'
 import CameraSDK from './components/camera_sdk.js'
-import { supabase } from './components/client_data.js'
-import router from './router/index.js'
+// import { supabase } from './components/client_data.js'
+import { useRouter } from 'vue-router'
+
 import {
   BNavbar,
   BNavbarNav,
@@ -53,21 +55,23 @@ import {
   BDropdownDivider
 } from 'bootstrap-vue-next'
 
+const router = useRouter()
+
 onMounted(async() =>{
   await CameraSDK.init()
 })
 
-const signOut = async () => {
-    const { error } = await supabase.auth.signOut()
-    if (error) {
-        console.log(error)
-        return
-    }
-    else {
-        await CameraSDK.stopSDK()
-        router.push('/login')
-    }
-}
+// const signOut = async () => {
+//     const { error } = await supabase.auth.signOut()
+//     if (error) {
+//         console.log(error)
+//         return
+//     }
+//     else {
+//         await CameraSDK.stopSDK()
+//         router.push('/login')
+//     }
+// }
 </script>
 
 <style>

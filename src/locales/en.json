@@ -15,7 +15,7 @@
     "register": {
         "title": "Register",
         "error": {
-            "password": "Password must be between 8 and 24 characters and have at least one number and one letter.",
+            "password": "Password must be between 8 and 24 characters and have at least one number, one letter and one special character.",
             "passwordRepeat": "Password doesn't match.",
             "400": "Error in register request, possible bad URL or body.",
             "422": "Error in processing the register request.",
@@ -89,22 +89,40 @@
             "title": "Instructions",
             "select": "Select",
             "cancel": "Cancel",
-            "body": "<p><b>Before proceeding, read the following instructions:</b></p><p>It is implied in this setup that you are warmed up. If not, press Cancel and proceed after being warmed up.</p><p>You have to do {noReps} repetitions of {title}.</p><p>You will have to click the record button and then position yourself in front of the camera <b>until the border color turns green</b>.</p><p>You will proceed to train according to the selected exercise and do up to {noReps} repetitions.</p><p>When you're done, click on the record button to stop the recording session and proceed to the feedback form.</p><p><b>By clicking Ok, you confirm that you've read the instructions.</b></p>"
+            "body": {
+                "beforeProceed": "Before proceeding, read the following instructions:",
+                "imply": "It is implied in this setup that you are warmed up. If not, press Cancel and proceed after being warmed up.",
+                "firstInstruction": "You have to do {noReps} repetitions of {title}.",
+                "secondInstruction": "You will have to click the record button and then position yourself in front of the camera",
+                "secondInstructionContinue": "until the border color turns green",
+                "thirdInstruction": "You will proceed to train according to the selected exercise and do up to {noReps} repetitions.",
+                "fourthInstruction": "When you're done, click on the record button to stop the recording session and proceed to the feedback form.",
+                "confirm": "By clicking Ok, you confirm that you've read the instructions."
+            }
         },
         "itemSubtitle": "Number of reps: {noReps}"
     },
     "fitnessExercises": {
         "abs": {
             "title": "Abs",
-            "description": "You must do some abs in order to determine your core fitness. <b>It is recommended to position yourself sideways of your camera.</b>"
+            "description": {
+                "firstInstruction": "You must do some abs in order to determine your core fitness.",
+                "secondInstruction": "It is recommended to position yourself sideways of your camera."
+            }
         },
         "pushups": {
             "title": "Pushups",
-            "description": "You must do some pushups in order to determine your chest fitness. <b>It is recommended to position yourself sideways of your camera.</b>"
+            "description": {
+                "firstInstruction": "You must do some pushups in order to determine your chest fitness.",
+                "secondInstruction": "It is recommended to position yourself sideways of your camera."
+            }
         },
         "squats": {
             "title": "Squats",
-            "description": "You must do some squats in order to determine your legs fitness. <b>It is recommended to position yourself in front of your camera.</b>"
+            "description": {
+                "firstInstruction": "You must do some squats in order to determine your legs fitness.",
+                "secondInstruction": "It is recommended to position yourself in front of your camera."
+            }
         }
     },
     "feedback": {
@@ -122,7 +140,10 @@
             "placeholder": "eg. 5 more"
         }
     },
-    "endSurvey": "<h3>Thank you!</h3>We would like to thank you for your time and effort in taking this survey! Stay tuned for future updates!",
+    "endSurvey": {
+        "title": "Thank you!",
+        "body": "We would like to thank you for your time and effort in taking this survey! Stay tuned for future updates!"
+    },
     "submit": "Submit",
     "reset": "Reset",
     "process": "Processing...",
@@ -137,7 +158,14 @@
     "signOut": "Sign out",
     "about": {
         "title": "About",
-        "body": "<h3>Who are we?</h3> We are a team from Politehnica University of Bucharest and are researching Computer Vision applied in sports and fitness. <h3>What are we researching?</h3> Our research scope is to determine motion fatigue and correlate it with perceived psychological fatigue. <h3>What to expect?</h3> We expect that you, the user, respect the provided instructions. The fitness set can be done by every individual, regardess of fitness level."
+        "body": {
+            "q1": "Who are we?",
+            "a1": "We are a team from Politehnica University of Bucharest and are researching Computer Vision applied in sports and fitness.",
+            "q2": "What are we researching?",
+            "a2": "Our research scope is to determine motion fatigue and correlate it with perceived psychological fatigue.",
+            "q3": "What to expect?",
+            "a3": "We expect that you, the user, respect the provided instructions. The fitness set can be done by every individual, regardess of fitness level."
+        }
     },
     "alert": {
         "form": {
@@ -149,5 +177,10 @@
             "denied": "Camera access denied, please enable permissions in your browser and refresh the page!",
             "notFound": "We couldn't find a camera, please connect a camera to a device to proceed!"
         }
-    }
+    },
+    "greeting": {
+        "title": "Greetings!",
+        "body": "Welcome to our survey! Please press the button below to proceed!"
+    },
+    "start": "Start"
 }

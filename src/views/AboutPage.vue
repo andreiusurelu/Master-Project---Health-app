@@ -1,6 +1,11 @@
 <template>
     <div class="container">
-        <p v-html="$t('about.body')"></p>
+        <h3>{{ $t('about.body.q1') }}</h3>
+        {{ $t('about.body.a1') }}
+        <h3>{{ $t('about.body.q2') }}</h3>
+        {{ $t('about.body.a2') }}
+        <h3>{{ $t('about.body.q3') }}</h3>
+        {{ $t('about.body.a3') }}
     </div>
 
 </template>

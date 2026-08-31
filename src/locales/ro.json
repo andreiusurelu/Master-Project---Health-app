@@ -15,7 +15,7 @@
     "register": {
         "title": "Înregistrare",
         "error": {
-            "password": "Parola trebuie să aibă între 8 și 24 de caractere și să aibă minim un număr și o literă.",
+            "password": "Parola trebuie să aibă între 8 și 24 de caractere și să aibă minim un număr, o literă și un caracter special.",
             "passwordRepeat": "Parolele nu se potrivesc.",
             "400": "Eroare în cererea de înregistrare, posibil cerere greșită.",
             "422": "Eroare în procesarea cererii de înregistrare.",
@@ -89,22 +89,40 @@
             "title": "Instrucțiuni",
             "select": "Selectează",
             "cancel": "Anulează",
-            "body": "<p><b>Înainte de a continua, citește următoarele instrucțiuni:</b></p><p>Se presupune în această sesiune că ești deja încălzit. În caz contrar, apasă Anulează și revino după ce ești încălzit.</p><p>Trebuie să faci {noReps} de {title}.</p><p>Va trebui să apeși pe butonul de record și să te poziționezi în fața camerei <b>până când culoarea marginii ecranului devine verde</b>.</p><p>Vei începe să efectuezi programul de exerciții selectat și să faci până în {noReps} de repetări.</p><p>Când ai terminat, apasă pe butonul de înregistrare pentru a opri sesiunea și completează formularul de feedback.</p><p><b>Prin apăsarea butonului Ok, confirmi că ai citit instrucțiunile.</b></p>"
+            "body": {
+                "beforeProceed": "Înainte de a continua, citește următoarele instrucțiuni:",
+                "imply": "Se presupune în această sesiune că ești deja încălzit. În caz contrar, apasă Anulează și revino după ce ești încălzit.",
+                "firstInstruction": "Trebuie să faci {noReps} de {title}.",
+                "secondInstruction": "Va trebui să apeși pe butonul de record și să te poziționezi în fața camerei",
+                "secondInstructionContinue": "până când culoarea marginii ecranului devine verde",
+                "thirdInstruction": "Vei începe să efectuezi programul de exerciții selectat și să faci până în {noReps} de repetări.",
+                "fourthInstruction": "Când ai terminat, apasă pe butonul de înregistrare pentru a opri sesiunea și completează formularul de feedback.",
+                "confirm": "Prin apăsarea butonului Ok, confirmi că ai citit instrucțiunile."
+            }
         },
         "itemSubtitle": "Număr de repetări: {noReps}"
     },
     "fitnessExercises": {
         "abs": {
             "title": "Abdomene",
-            "description": "Trebuie să faci abdomene pentru a determina nivelul de fitness al abdomenului. <b>Este recomandat să te poziționezi lateral de camera ta.</b>"
+            "description": {
+                "firstInstruction": "Trebuie să faci abdomene pentru a determina nivelul de fitness al abdomenului.",
+                "secondInstruction": "Este recomandat să te poziționezi lateral de camera ta."
+            }
         },
         "pushups": {
             "title": "Flotări",
-            "description": "Trebuie să faci flotări pentru a determina nivelul de fitness al pieptului tău. <b>Este recomandat să te poziționezi lateral de camera ta.</b>"
+            "description": {
+                "firstInstruction": "Trebuie să faci flotări pentru a determina nivelul de fitness al pieptului tău.",
+                "secondInstruction": "Este recomandat să te poziționezi lateral de camera ta."
+            }
         },
         "squats": {
             "title": "Genoflexiuni",
-            "description": "Trebuie să faci genoflexiuni pentru a determina nivelul de fitness al picioarelor tale. <b>Este recomandat să te poziționezi frontal de camera ta.</b>"
+            "description": {
+                "firstInstruction": "Trebuie să faci genoflexiuni pentru a determina nivelul de fitness al picioarelor tale.",
+                "secondInstruction": "Este recomandat să te poziționezi frontal de camera ta."
+            }
         }
     },
     "feedback": {
@@ -122,7 +140,10 @@
             "placeholder": "ex. încă 5"
         }
     },
-    "endSurvey": "<h3>Mulțumim!</h3>Dorim să îți mulțumim pentru completarea acestui sondaj! Rămâi la curent pentru viitoare actualizări!",
+    "endSurvey": {
+        "title": "Mulțumim!",
+        "body": "Dorim să îți mulțumim pentru completarea acestui sondaj! Rămâi la curent pentru viitoare actualizări!"
+    },
     "submit": "Trimite",
     "reset": "Resetare",
     "process": "Se încarcă..",
@@ -137,7 +158,14 @@
     "signOut": "Deconectare",
     "about": {
         "title": "Despre",
-        "body": "<h3>Cine suntem noi?</h3>Suntem o echipă din cadrul Universității Politehnica din București și cercetăm aplicarea algoritmilor de Computer Vision în sport. <h3>Care este scopul studiului?</h3> Scopul cercetării noastre este de a determina oboseala fizică și de a o corela cu oboseala psihologică percepută. <h3>La ce să mă aștept?</h3> Ne așteptăm ca tu, utilizatorul, să respecți instrucțiunile oferite. Setul de exerciții poate fi făcut de oricine, indiferent de nivelul de fitness."
+        "body": {
+            "q1": "Cine suntem noi?",
+            "a1": "Suntem o echipă din cadrul Universității Politehnica din București și cercetăm aplicarea algoritmilor de Computer Vision în sport.",
+            "q2": "Care este scopul studiului?",
+            "a2": "Scopul cercetării noastre este de a determina oboseala fizică și de a o corela cu oboseala psihologică percepută.",
+            "q3": "La ce să mă aștept?",
+            "a3": "Ne așteptăm ca tu, utilizatorul, să respecți instrucțiunile oferite. Setul de exerciții poate fi făcut de oricine, indiferent de nivelul de fitness."
+        }
     },
     "alert": {
         "form": {
@@ -149,5 +177,10 @@
             "denied": "Accesul camerei video a fost refuzat, te rog permite accesul camerei în browser-ul tău și reîmprospătează pagina!",
             "notFound": "Nu am putut găsi o cameră video, te rog conectează o cameră cu dispozitivul tău pentru a continua!"
         }
-    }
+    },
+    "greeting": {
+        "title": "Salutare!",
+        "body": "Bine ai venit în sondajul nostru! Apasă butonul de dedesubt pentru a începe!"
+    },
+    "start": "Începe"
 }

@@ -40,14 +40,16 @@
 </template>
 
 <script setup>
-import { onBeforeMount, onMounted, onUnmounted, ref, computed } from 'vue'
+import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import CameraSDK from '../components/camera_sdk.js'
 import { BButton } from 'bootstrap-vue-next'
 import { useI18n } from 'vue-i18n'
-import router from '../router'
 
 import { useFitnessStore } from '../components/states/fitness_data.js'
 
+
+const router = useRouter()
 
 const videoRef = ref(null)
 

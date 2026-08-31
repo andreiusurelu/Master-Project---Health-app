@@ -1,0 +1,10 @@
+[
+    {
+        "value": 0,
+        "text": "userForm.sex.male"
+    },
+    {
+        "value": 1,
+        "text": "userForm.sex.female"
+    }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "value": null, "text": "userForm.level.options.chooseOption"
+  },
+  {
+    "value": 1, "text": "userForm.level.options.beginner"
+  },
+  {
+    "value": 2, "text": "userForm.level.options.intermediary"
+  },
+  {
+    "value": 3, "text": "userForm.level.options.advanced"
+  }
+]

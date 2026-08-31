@@ -15,7 +15,7 @@
     "register": {
         "title": "Anmeldung",
         "error": {
-            "password": "Das Passwort muss zwischen 8 und 24 Zeichen lang sein und mindestens eine Zahl und einen Buchstaben enthalten.",
+            "password": "Das Passwort muss zwischen 8 und 24 Zeichen lang sein und mindestens eine Zahl,einen Buchstaben und einen Sondernzeichen enthalten.",
             "passwordRepeat": "Die Passwörter stimmen nicht überein.",
             "400": "Fehler bei der Registrierungsanfrage, möglicherweise eine ungültige Anfrage.",
             "422": "Fehler bei der Verarbeitung der Registrierungsanfrage.",
@@ -89,22 +89,40 @@
         "title": "Anweisungen",
         "select": "Auswählen",
         "cancel": "Abbrechen",
-        "body": "<p><b>Bevor du fortfährst, lies bitte die folgenden Anweisungen:</b></p><p>Es wird vorausgesetzt, dass du für diese Sitzung bereits aufgewärmt bist. Falls nicht, klicke auf Abbrechen und kehre zurück, nachdem du dich aufgewärmt hast.</p><p>Du musst {noReps} Wiederholungen von {title} machen.</p><p>Du musst die Aufnahmetaste drücken und dich vor der Kamera positionieren, <b>bis der Rand des Bildschirms grün wird</b>.</p><p>Du beginnst dann mit dem ausgewählten Übungsprogramm und führst bis zu {noReps} Wiederholungen aus.</p><p>Wenn du fertig bist, drücke die Aufnahmetaste, um die Sitzung zu beenden, und fülle anschließend das Feedbackformular aus.</p><p><b>Durch Drücken der OK-Taste bestätigst du, dass du die Anweisungen gelesen hast.</b></p>"
+        "body": {
+                "beforeProceed": "Bevor du fortfährst, lies bitte die folgenden Anweisungen:",
+                "imply": "s wird vorausgesetzt, dass du für diese Sitzung bereits aufgewärmt bist. Falls nicht, klicke auf Abbrechen und kehre zurück, nachdem du dich aufgewärmt hast.",
+                "firstInstruction": "Du musst {noReps} Wiederholungen von {title} machen.",
+                "secondInstruction": "Du musst die Aufnahmetaste drücken und dich vor der Kamera positionieren,",
+                "secondInstructionContinue": "bis der Rand des Bildschirms grün wird",
+                "thirdInstruction": "Du beginnst dann mit dem ausgewählten Übungsprogramm und führst bis zu {noReps} Wiederholungen aus.",
+                "fourthInstruction": "Wenn du fertig bist, drücke die Aufnahmetaste, um die Sitzung zu beenden, und fülle anschließend das Feedbackformular aus.",
+                "confirm": "Durch Drücken der OK-Taste bestätigst du, dass du die Anweisungen gelesen hast."
+            }
         },
         "itemSubtitle": "Anzahl der Wiederholungen: {noReps}"
     },
     "fitnessExercises": {
         "abs": {
-        "title": "Sit-ups",
-        "description": "Du musst Sit-ups machen, um das Fitnessniveau deiner Bauchmuskulatur zu bestimmen. <b>Es wird empfohlen, dich seitlich zur Kamera zu positionieren.</b>"
+            "title": "Sit-ups",
+            "description": {
+                    "firstInstruction": "Du musst Sit-ups machen, um das Fitnessniveau deiner Bauchmuskulatur zu bestimmen.",
+                    "secondInstruction": "Es wird empfohlen, dich seitlich zur Kamera zu positionieren."
+            }
         },
         "pushups": {
-        "title": "Liegestütze",
-        "description": "Du musst Liegestütze machen, um das Fitnessniveau deiner Brustmuskulatur zu bestimmen. <b>Es wird empfohlen, dich seitlich zur Kamera zu positionieren.</b>"
+            "title": "Liegestütze",
+            "description": {
+                        "firstInstruction": "Du musst Liegestütze machen, um das Fitnessniveau deiner Brustmuskulatur zu bestimmen.",
+                        "secondInstruction": "Es wird empfohlen, dich seitlich zur Kamera zu positionieren."
+            }
         },
         "squats": {
-        "title": "Kniebeugen",
-        "description": "Du musst Kniebeugen machen, um das Fitnessniveau deiner Beinmuskulatur zu bestimmen. <b>Es wird empfohlen, dich frontal zur Kamera zu positionieren.</b>"
+            "title": "Kniebeugen",
+            "description": {
+                            "firstInstruction": "Du musst Kniebeugen machen, um das Fitnessniveau deiner Beinmuskulatur zu bestimmen.",
+                            "secondInstruction": "Es wird empfohlen, dich frontal zur Kamera zu positionieren."
+            }
         }
     },
     "feedback": {
@@ -122,7 +140,10 @@
             "placeholder": "z. B. noch 5"
         }
     },
-    "endSurvey": "<h3>Vielen Dank!</h3>Wir möchten uns bei dir für das Ausfüllen dieser Umfrage bedanken! Bleibe auf dem Laufenden über zukünftige Updates!",
+    "endSurvey": {
+        "title": "Vielen Dank!",
+        "body": "Wir möchten uns bei dir für das Ausfüllen dieser Umfrage bedanken! Bleibe auf dem Laufenden über zukünftige Updates!"
+    },
     "submit": "Absenden",
     "reset": "Zurücksetzen",
     "process": "Wird geladen...",
@@ -137,7 +158,14 @@
     "signOut": "Abmelden",
     "about": {
         "title": "Über uns",
-        "body": "<h3>Wer sind wir?</h3>Wir sind ein Team der Politehnica Universität Bukarest und erforschen die Anwendung von Computer-Vision-Algorithmen im Sport. <h3>Was ist das Ziel der Studie?</h3>Das Ziel unserer Forschung ist es, körperliche Ermüdung zu bestimmen und sie mit der wahrgenommenen psychologischen Ermüdung zu korrelieren. <h3>Was kann ich erwarten?</h3>Wir erwarten, dass du als Nutzer die bereitgestellten Anweisungen befolgst. Das Übungsprogramm kann von jedem durchgeführt werden, unabhängig vom Fitnessniveau."
+        "body": {
+            "q1": "Wer sind wir?",
+            "a1": "Wir sind ein Team der Politehnica Universität Bukarest und erforschen die Anwendung von Computer-Vision-Algorithmen im Sport.",
+            "q2": "Was ist das Ziel der Studie?",
+            "a2": "Das Ziel unserer Forschung ist es, körperliche Ermüdung zu bestimmen und sie mit der wahrgenommenen psychologischen Ermüdung zu korrelieren.",
+            "q3": "Was kann ich erwarten?",
+            "a3": "Wir erwarten, dass du als Nutzer die bereitgestellten Anweisungen befolgst. Das Übungsprogramm kann von jedem durchgeführt werden, unabhängig vom Fitnessniveau."
+        }
     },
     "alert": {
         "form": {
@@ -149,5 +177,10 @@
             "denied": "Der Zugriff auf die Videokamera wurde verweigert. Bitte erlaube den Kamerazugriff in deinem Browser und aktualisiere die Seite!",
             "notFound": "Es konnte keine Videokamera gefunden werden. Bitte verbinde eine Kamera mit deinem Gerät, um fortzufahren!"
         }
-    }
+    },
+    "greeting": {
+        "title": "Greetings!",
+        "body": "Welcome to our survey! Please press the button below to proceed!"
+    },
+    "start": "Los"
 }

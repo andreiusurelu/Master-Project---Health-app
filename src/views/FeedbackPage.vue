@@ -28,11 +28,12 @@
 import { reactive, computed, ref, onBeforeMount } from 'vue'
 import { BButton, BForm, BFormInput, BFormGroup, BFormInvalidFeedback } from 'bootstrap-vue-next'
 import { supabase } from '../components/client_data'
-import router from '../router'
+import { useRouter } from 'vue-router'
 import { useFitnessStore } from '../components/states/fitness_data'
 import { useI18n } from 'vue-i18n'
 
 const {t} = useI18n()
+const router = useRouter()
 
 const feedback = reactive({
   done_reps: '',
@@ -72,6 +73,7 @@ const submitFeedback = async () => {
 
   if (response.success) {
     alert(t('alert.form.saved'))
+    store.clearSessionData();
     router.push('/cards')
   }
   else {

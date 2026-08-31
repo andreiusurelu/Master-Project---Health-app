@@ -28,10 +28,11 @@
 <script setup>
 import { ref, reactive, computed, watch } from 'vue'
 import { BButton, BForm, BFormInput, BFormGroup, BFormInvalidFeedback } from 'bootstrap-vue-next'
-import router from '../router/index.js'
+import { useRouter } from 'vue-router'
 import { supabase, authEvent, authSession } from '../components/client_data.js'
 import { constants } from '../components/constants/constants.js'
 
+const router = useRouter()
 
 const resetData = reactive({
     password: '',

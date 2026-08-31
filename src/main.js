@@ -7,7 +7,7 @@ import { createI18n } from 'vue-i18n'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
 
-import router from './router'
+import router from './router/index_anon.js'
 
 import ro from './locales/ro.json'
 import en from './locales/en.json'
@@ -18,6 +18,7 @@ createApp(App)
   .use(createBootstrap())
   .use(createPinia())
   .use(createI18n({
+    legacy: false,
     locale: navigator.language,
     escapeParameter: true,
     fallbackLocale: 'en',

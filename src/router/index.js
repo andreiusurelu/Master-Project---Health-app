@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { supabase } from '../components/client_data.js'
-import { storeToRefs } from 'pinia'
 
 import UserForm from '../views/UserForm.vue'
 import CameraPage from '../views/CameraPage.vue'

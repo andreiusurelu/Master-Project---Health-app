@@ -29,11 +29,16 @@ export const useFitnessStore = defineStore('fitness-data', () => {
         fitnessSessionData.value = data
     }
 
+    function clearSessionData() {
+        selectedExercise.value = null;
+        fitnessSessionData.value = null;
+    }
+
     function $reset() {
         selectedExercise.value = null;
         fitnessSessionData.value = null;
         exerciseList.value = exerciseData.map(exercise => ({...exercise, selected: false}));
     }
 
-    return {selectedExercise, fitnessSessionData, exerciseList, name, noReps, allSelected, updateExerciseList, setSelectedExercise, setFitnessSessionData, $reset}
+    return {selectedExercise, fitnessSessionData, exerciseList, name, noReps, allSelected, updateExerciseList, setSelectedExercise, setFitnessSessionData, clearSessionData, $reset}
 })
