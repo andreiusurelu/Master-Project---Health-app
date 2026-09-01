@@ -31,7 +31,7 @@ const routes = [
     path: '/userForm',
     name: 'userForm',
     component: UserForm,
-    meta: { topbar: true },
+    meta: { requiresAuth: true, topbar: true },
     beforeEnter: async () => {
       const formStore = useFormData()
       if (formStore.validForm) {
@@ -67,6 +67,7 @@ const routes = [
     path: '/camera',
     name: 'camera',
     component: CameraPage,
+    meta: { requiresAuth: true},
     beforeEnter: () => {
       const store = useFitnessStore();
       if (store.selectedExercise == null) {
@@ -84,7 +85,7 @@ const routes = [
     path: '/feedback',
     name: 'feedback',
     component: FeedbackPage,
-    meta: { topbar: true },
+    meta: { requiresAuth: true, topbar: true },
     beforeEnter: () => {
       const store = useFitnessStore();
       if (store.selectedExercise == null) {
@@ -102,7 +103,7 @@ const routes = [
     path: '/cards',
     name: 'cards',
     component: FitnessCardPage,
-    meta: { topbar: true },
+    meta: { requiresAuth: true, topbar: true },
     beforeEnter: async (to, from) => {
       const formStore = useFormData();
       if (formStore.validForm) {
@@ -143,7 +144,7 @@ const routes = [
     path: '/endSurvey',
     name: 'endSurvey',
     component: EndSurveyPage,
-    meta: { topbar: true },
+    meta: { requiresAuth: true, topbar: true },
     beforeEnter: () => {
       const store = useFitnessStore();
       if (!store.allSelected) {
@@ -189,7 +190,7 @@ router.beforeEach(async (to) => {
 
   const user = session?.user
 
-  if (user == null && to.name !== 'greetings') {
+  if (user == null && to.meta.requiresAuth) {
     return '/greetings'
   }
   else {

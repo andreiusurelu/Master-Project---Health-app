@@ -12,7 +12,7 @@ export const useFormData = defineStore('user-form', () => {
     const validateAge = computed(() => age.value !== null && age.value >= constants.minAge && age.value <= constants.maxAge)
     const validateWeight = computed(() => weight.value !== null && weight.value >= constants.minWeight && weight.value <= constants.maxWeight)
     const validateHeight = computed(() => height.value !== null && height.value >= constants.minHeight && height.value <= constants.maxHeight)
-    const validForm = computed(() => validateAge && validateHeight && validateWeight && sex !== null && level !== null)
+    const validForm = computed(() => validateAge.value && validateHeight.value && validateWeight.value && sex !== null && level !== null)
 
     function $reset() {
         age.value = null

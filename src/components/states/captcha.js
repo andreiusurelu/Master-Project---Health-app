@@ -1,3 +1,4 @@
+import { max } from '@tensorflow/tfjs'
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
@@ -8,6 +9,7 @@ export const useCaptchaStore = defineStore('captcha-state', () => {
     const expired = ref(false)
     const eKey = ref('')
     const error = ref(null)
+    const maxRetries = ref(2)
 
     function submit() {
         if (captcha.value == null) {
@@ -44,7 +46,7 @@ export const useCaptchaStore = defineStore('captcha-state', () => {
     }
 
     function resetCaptcha() {
-        captcha.value = null;
+        captcha.value?.reset();
         captchaToken.value = '';
         eKey.value = '';
         verified.value = false;
@@ -56,5 +58,13 @@ export const useCaptchaStore = defineStore('captcha-state', () => {
         resetCaptcha();
     }
 
-    return {captchaToken, eKey, captcha, verified, expired, error, setCaptcha, submit, setVerified, setExpired, setError, resetCaptcha, $reset}
+    function retry() {
+        if (maxRetries.value > 0) {
+            maxRetries.value--;
+            resetCaptcha();
+            captcha.value.execute();
+        }
+    }
+
+    return {captchaToken, eKey, captcha, verified, expired, error, maxRetries, retry, setCaptcha, submit, setVerified, setExpired, setError, resetCaptcha, $reset}
 })

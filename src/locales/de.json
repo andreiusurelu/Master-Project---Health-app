@@ -179,8 +179,8 @@
         }
     },
     "greeting": {
-        "title": "Greetings!",
-        "body": "Welcome to our survey! Please press the button below to proceed!"
+        "title": "Grüße!",
+        "body": "Herzlich willkommen bei unserer Umfrage! Bitte klicken Sie auf die Schaltfläche unten, um fortzufahren!"
     },
     "start": "Los"
 }
