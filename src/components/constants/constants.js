@@ -12,5 +12,5 @@ export const constants = {
     passwordRegex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,24}$/gm,
     visibilityThreshold: 0.5,
     modelToUse: 'BLAZEPOSE',
-    sitekey: 'acd8995e-a552-4f78-af4e-a9ce2d5681ea'
+    sitekey: 'de82cca8-10f8-4d9c-a8ce-083aba829c16'
 }
