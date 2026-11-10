@@ -4,7 +4,7 @@
         <p>
             {{ $t('greeting.body') }}
         </p>
-        <vue-hcaptcha :sitekey="constants.sitekey" size="invisible" @verify="onVerify" @rendered="onRendered" @executed="onExecuted"
+        <vue-hcaptcha v-if="constants.captchaEnabled" :sitekey="constants.sitekey" size="invisible" @verify="onVerify" @rendered="onRendered" @executed="onExecuted"
         @expired="onExpire" @opened="onOpened" @challenge-expired="onChallengeExpired" @error="onError" @load="onLoad" :ref="store.setCaptcha"/>
         <BButton v-if="isLoading" disabled variant="primary">
             <BSpinner small />
@@ -29,10 +29,26 @@ const isLoading = ref(false);
 
 const router = useRouter();
 
-const proceed = () => {
-    isLoading.value = true;
-    store.submit();
+const proceed = async () => {
+    if (constants.captchaEnabled) {
+        isLoading.value = true;
+        store.submit();
+    }
+    else {
+        isLoading.value = true;
+        await signInWithoutCaptcha();
+    }
 }
+
+const signInWithoutCaptcha = async () => {
+    const { data, error } = await supabase.auth.signInAnonymously();
+
+    if (error) {
+        console.error(error);
+        isLoading.value = false;
+        return;
+    }
+};
 
 const onVerify = async (tokenStr, ekey) => {
     store.setVerified(tokenStr, ekey);
